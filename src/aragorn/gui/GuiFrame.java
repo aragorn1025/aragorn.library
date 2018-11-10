@@ -3,6 +3,7 @@ package aragorn.gui;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.security.InvalidParameterException;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -36,6 +37,8 @@ public abstract class GuiFrame extends JFrame {
 	/** The timer using in {@code GuiFrame}. */
 	private GuiTimer timer = null;
 
+	private GuiTerminalPanel terminalPanel = null;
+
 	/**
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane.
 	 * 
@@ -46,8 +49,8 @@ public abstract class GuiFrame extends JFrame {
 	 * @param is_maximized_while_launch
 	 *            to maximize frame while launch
 	 */
-	public GuiFrame(String title, Dimension dimension, boolean is_maximized_while_launch) {
-		this(title, dimension, is_maximized_while_launch, -1);
+	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch) {
+		this(dimension, is_maximized_while_launch, -1);
 	}
 
 	/**
@@ -63,12 +66,18 @@ public abstract class GuiFrame extends JFrame {
 	 *            the period for timer that updates content pane on {@code GuiFrame}<br>
 	 *            Disable the timer if it's non-positive.
 	 */
-	public GuiFrame(String title, Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
-		setSize(dimension);
-		setLocationRelativeTo(null);
+	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
 		this.content_pane.setDefaultMargin(10);
 		editContentPane();
 		setContentPane(this.content_pane);
+
+		setSize(dimension);
+		setLocationRelativeTo(null);
+
+		if (is_maximized_while_launch) {
+			setExtendedState(JFrame.MAXIMIZED_BOTH);
+		}
+
 		setDefaultCloseOperation(0);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -76,18 +85,20 @@ public abstract class GuiFrame extends JFrame {
 				GuiFrame.this.close();
 			}
 		});
-		setTitle(title);
-		if (is_maximized_while_launch) {
-			setExtendedState(JFrame.MAXIMIZED_BOTH);
-		}
+
 		if (updating_period > 0) {
 			timer = new GuiTimer(updating_period) {
 				@Override
-				protected void taskRun() {
+				protected void run() {
+					_run();
 					content_pane.repaint();
 				}
 			};
 		}
+	}
+
+	private void _run() {
+		run();
 	}
 
 	/**
@@ -98,8 +109,8 @@ public abstract class GuiFrame extends JFrame {
 	public void close() {
 		boolean is_playing_before = timer.isPlaying();
 		this.pause();
-		String[] exitPaneButtons = {"Yes", "No"};
-		int n = JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Exit", 0, 2, null, exitPaneButtons, exitPaneButtons[0]);
+		String[] exit_pane_buttons = {"Yes", "No"};
+		int n = JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Exit", 0, 2, null, exit_pane_buttons, exit_pane_buttons[0]);
 		if (n == 0) {
 			timer.terminate();
 			dispose();
@@ -110,11 +121,44 @@ public abstract class GuiFrame extends JFrame {
 		}
 	}
 
-	/** Initial content pane as creating {@code GuiFrame}. */
-	protected abstract void editContentPane();
+	public void echo(String message) {
+		if (terminalPanel != null) {
+			terminalPanel.echo(message);
+		} else {
+			echo(message, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
 
-	/** Edit timer task run. */
-	protected void editTimerTaskRun() {
+	public void echo(String message, int message_type) {
+		String message_type_string;
+		switch (message_type) {
+			case JOptionPane.ERROR_MESSAGE:
+				message_type_string = "Error";
+				break;
+			case JOptionPane.INFORMATION_MESSAGE:
+				message_type_string = "Information";
+				break;
+			case JOptionPane.WARNING_MESSAGE:
+				message_type_string = "Warning";
+				break;
+			case JOptionPane.QUESTION_MESSAGE:
+				message_type_string = "Question";
+				break;
+			case JOptionPane.PLAIN_MESSAGE:
+				message_type_string = "Plain";
+				break;
+			default:
+				throw new InvalidParameterException("Unknown message type.");
+		}
+		if (terminalPanel != null) {
+			terminalPanel.echo(String.format("[%s] %s", message_type_string, message));
+		} else {
+			JOptionPane.showMessageDialog(this, message, message_type_string, message_type);
+		}
+	}
+
+	/** Initial content pane as creating {@code GuiFrame}. */
+	protected void editContentPane() {
 	}
 
 	@Override
@@ -134,5 +178,9 @@ public abstract class GuiFrame extends JFrame {
 		if (timer == null)
 			throw new NullPointerException("The timer is not create.");
 		timer.play();
+	}
+
+	/** Edit timer task run. */
+	protected void run() {
 	}
 }

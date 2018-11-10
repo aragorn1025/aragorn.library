@@ -10,35 +10,23 @@ import java.awt.geom.Point2D;
 public class MathVector2D implements Cloneable {
 
 	/**
-	 * Add two vectors.
-	 * 
-	 * @param vector_0
-	 *            the first vector
-	 * @param vector_1
-	 *            the second vector
-	 * @return the result
-	 */
-	public static MathVector2D add(MathVector2D vector_0, MathVector2D vector_1) {
-		return MathVector2D.add(new MathVector2D[] {vector_0, vector_1});
-	}
-
-	/**
 	 * Add vectors.
-	 * 
-	 * @param vectors
-	 *            the vectors
-	 * @return the result
 	 */
-	public static MathVector2D add(MathVector2D[] vectors) {
-		if (vectors == null)
+	public static MathVector2D add(MathVector2D vector_0, MathVector2D vector_1, MathVector2D... vectors) {
+		if (vector_0 == null)
 			throw new NullPointerException("The input vectors for add() must not be null.");
-		if (vectors.length == 0)
-			throw new NullPointerException("The input vectors for add() must not be nothing.");
-		double x = 0;
-		double y = 0;
-		for (int i = 0; i < vectors.length; i++) {
-			x += vectors[i].getX();
-			y += vectors[i].getY();
+		if (vector_1 == null)
+			throw new NullPointerException("The input vectors for add() must not be null.");
+		for (MathVector2D vector : vectors) {
+			if (vector == null) {
+				throw new NullPointerException("The input vectors for add() must not be null.");
+			}
+		}
+		double x = vector_0.getX() + vector_1.getX();
+		double y = vector_0.getY() + vector_1.getY();
+		for (MathVector2D vector : vectors) {
+			x += vector.getX();
+			y += vector.getY();
 		}
 		return new MathVector2D(x, y);
 	}
@@ -72,14 +60,10 @@ public class MathVector2D implements Cloneable {
 	}
 
 	/**
-	 * Add other vector with this vector.
-	 * 
-	 * @param vector
-	 *            the other vector
-	 * @return the result
+	 * Add other vectors to this vector.
 	 */
-	public MathVector2D add(MathVector2D vector) {
-		return MathVector2D.add(new MathVector2D[] {this, vector});
+	public MathVector2D add(MathVector2D vector_0, MathVector2D... vectors) {
+		return MathVector2D.add(this, vector_0, vectors);
 	}
 
 	@Override
@@ -99,10 +83,12 @@ public class MathVector2D implements Cloneable {
 			return false;
 		MathVector2D other = (MathVector2D) obj;
 		if (end_point == null) {
-			if (other.end_point != null)
+			if (other.end_point != null) {
 				return false;
-		} else if (!end_point.equals(other.end_point))
+			}
+		} else if (!end_point.equals(other.end_point)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -157,6 +143,8 @@ public class MathVector2D implements Cloneable {
 	 *            the new vector to be set
 	 */
 	public void set(MathVector2D vector) {
+		if (vector == null)
+			throw new NullPointerException();
 		if (!vector.equals(this)) {
 			this.set(vector.getX(), vector.getY());
 		}

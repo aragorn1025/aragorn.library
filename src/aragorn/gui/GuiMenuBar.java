@@ -3,15 +3,18 @@ package aragorn.gui;
 import javax.swing.JMenuBar;
 
 /**
- * {@code MyMenuBar} is a menu bar which extends JMenuBar. Using menu name as adding the menu item to the menu.
+ * {@code MyMenuBar} is a menu bar which extends JMenuBar.
  * 
  * @author Aragorn
  */
 @SuppressWarnings("serial")
 public abstract class GuiMenuBar extends JMenuBar {
 
-	public GuiMenuBar() {
+	protected GuiFrame parent;
+
+	public GuiMenuBar(GuiFrame parent) {
 		super();
+		this.parent = parent;
 		editMenuBar();
 	}
 

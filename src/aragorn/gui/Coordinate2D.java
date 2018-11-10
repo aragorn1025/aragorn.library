@@ -11,6 +11,7 @@ import aragorn.math.MathVector2D;
  * @author Aragorn
  */
 public class Coordinate2D {
+
 	/** The location of the center on the panel. */
 	private Point2D.Double center;
 
