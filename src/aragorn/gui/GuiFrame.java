@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Aragorn
  */
 @SuppressWarnings("serial")
-public abstract class GuiFrame extends JFrame {
+public class GuiFrame extends JFrame {
 
 	/**
 	 * Set default look and feel decorated for frames and dialogs.
