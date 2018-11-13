@@ -18,6 +18,16 @@ import javax.swing.JOptionPane;
 @SuppressWarnings("serial")
 public class GuiFrame extends JFrame {
 
+	public static final int PLAIN_MESSAGE = JOptionPane.PLAIN_MESSAGE;
+
+	public static final int ERROR_MESSAGE = JOptionPane.ERROR_MESSAGE;
+
+	public static final int INFORMATION_MESSAGE = JOptionPane.INFORMATION_MESSAGE;
+
+	public static final int WARNING_MESSAGE = JOptionPane.WARNING_MESSAGE;
+
+	public static final int QUESTION_MESSAGE = JOptionPane.QUESTION_MESSAGE;
+
 	/**
 	 * Set default look and feel decorated for frames and dialogs.
 	 * 
@@ -121,31 +131,27 @@ public class GuiFrame extends JFrame {
 		}
 	}
 
-	public void echo(String message) {
-		if (terminalPanel != null) {
-			terminalPanel.echo(message);
-		} else {
-			echo(message, JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
-
 	public void echo(String message, int message_type) {
 		String message_type_string;
 		switch (message_type) {
-			case JOptionPane.ERROR_MESSAGE:
+			case GuiFrame.PLAIN_MESSAGE:
+				if (terminalPanel != null) {
+					terminalPanel.echo(message);
+				} else {
+					JOptionPane.showMessageDialog(this, message, "Information", message_type);
+				}
+				return;
+			case GuiFrame.ERROR_MESSAGE:
 				message_type_string = "Error";
 				break;
-			case JOptionPane.INFORMATION_MESSAGE:
+			case GuiFrame.INFORMATION_MESSAGE:
 				message_type_string = "Information";
 				break;
-			case JOptionPane.WARNING_MESSAGE:
+			case GuiFrame.WARNING_MESSAGE:
 				message_type_string = "Warning";
 				break;
-			case JOptionPane.QUESTION_MESSAGE:
+			case GuiFrame.QUESTION_MESSAGE:
 				message_type_string = "Question";
-				break;
-			case JOptionPane.PLAIN_MESSAGE:
-				message_type_string = "Plain";
 				break;
 			default:
 				throw new InvalidParameterException("Unknown message type.");
