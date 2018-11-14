@@ -117,12 +117,12 @@ public class GuiFrame extends JFrame {
 	 * Additionally, pause timer as the option pane shown and continue the state of the timer if return to the GuiFrame.
 	 */
 	public void close() {
-		boolean is_playing_before = timer.isPlaying();
+		boolean is_playing_before = isPlaying();
 		this.pause();
 		String[] exit_pane_buttons = {"Yes", "No"};
 		int n = JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Exit", 0, 2, null, exit_pane_buttons, exit_pane_buttons[0]);
 		if (n == 0) {
-			timer.terminate();
+			terminate();
 			dispose();
 		} else {
 			if (is_playing_before) {
@@ -174,16 +174,24 @@ public class GuiFrame extends JFrame {
 
 	/** Pause the timer of the frame. */
 	public void pause() {
-		if (timer == null)
-			throw new NullPointerException("The timer is not create.");
-		timer.pause();
+		if (timer != null) {
+			timer.pause();
+		}
 	}
 
 	/** Play the timer of the frame. */
 	public void play() {
-		if (timer == null)
-			throw new NullPointerException("The timer is not create.");
-		timer.play();
+		if (timer != null) {
+			timer.play();
+		}
+	}
+
+	public boolean isPlaying() {
+		return (timer != null && timer.isPlaying());
+	}
+
+	public int terminate() {
+		return timer.terminate();
 	}
 
 	/** Edit timer task run. */
