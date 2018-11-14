@@ -191,6 +191,9 @@ public class GuiFrame extends JFrame {
 	}
 
 	public int terminate() {
+		if (timer == null) {
+			return 0;
+		}
 		return timer.terminate();
 	}
 
