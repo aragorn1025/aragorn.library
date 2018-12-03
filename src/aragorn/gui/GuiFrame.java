@@ -47,7 +47,7 @@ public class GuiFrame extends JFrame {
 	/** The timer using in {@code GuiFrame}. */
 	private GuiTimer timer = null;
 
-	private GuiTerminalPanel terminalPanel = null;
+	protected GuiTerminalPanel terminal_panel = null;
 
 	/**
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane.
@@ -128,6 +128,7 @@ public class GuiFrame extends JFrame {
 			if (is_playing_before) {
 				this.play();
 			}
+			echo("Frame closing command cancelled by user.", GuiFrame.WARNING_MESSAGE);
 		}
 	}
 
@@ -135,8 +136,8 @@ public class GuiFrame extends JFrame {
 		String message_type_string;
 		switch (message_type) {
 			case GuiFrame.PLAIN_MESSAGE:
-				if (terminalPanel != null) {
-					terminalPanel.echo(message);
+				if (terminal_panel != null) {
+					terminal_panel.echo(message);
 				} else {
 					JOptionPane.showMessageDialog(this, message, "Information", message_type);
 				}
@@ -156,8 +157,8 @@ public class GuiFrame extends JFrame {
 			default:
 				throw new InvalidParameterException("Unknown message type.");
 		}
-		if (terminalPanel != null) {
-			terminalPanel.echo(String.format("[%s] %s", message_type_string, message));
+		if (terminal_panel != null) {
+			terminal_panel.echo(String.format("[%s] %s", message_type_string, message));
 		} else {
 			JOptionPane.showMessageDialog(this, message, message_type_string, message_type);
 		}
@@ -170,6 +171,10 @@ public class GuiFrame extends JFrame {
 	@Override
 	public GuiPanel getContentPane() {
 		return content_pane;
+	}
+
+	public boolean isPlaying() {
+		return (timer != null && timer.isPlaying());
 	}
 
 	/** Pause the timer of the frame. */
@@ -186,8 +191,8 @@ public class GuiFrame extends JFrame {
 		}
 	}
 
-	public boolean isPlaying() {
-		return (timer != null && timer.isPlaying());
+	/** Edit timer task run. */
+	protected void run() {
 	}
 
 	public int terminate() {
@@ -195,9 +200,5 @@ public class GuiFrame extends JFrame {
 			return 0;
 		}
 		return timer.terminate();
-	}
-
-	/** Edit timer task run. */
-	protected void run() {
 	}
 }
