@@ -47,7 +47,7 @@ public class GuiFrame extends JFrame {
 	/** The timer using in {@code GuiFrame}. */
 	private GuiTimer timer = null;
 
-	protected GuiTerminalPanel terminal_panel = null;
+	protected GuiLogPanel log_panel = null;
 
 	/**
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane.
@@ -77,7 +77,6 @@ public class GuiFrame extends JFrame {
 	 *            Disable the timer if it's non-positive.
 	 */
 	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
-		this.content_pane.setDefaultMargin(10);
 		editContentPane();
 		setContentPane(this.content_pane);
 
@@ -136,8 +135,8 @@ public class GuiFrame extends JFrame {
 		String message_type_string;
 		switch (message_type) {
 			case GuiFrame.PLAIN_MESSAGE:
-				if (terminal_panel != null) {
-					terminal_panel.echo(message);
+				if (log_panel != null) {
+					log_panel.echo(message);
 				} else {
 					JOptionPane.showMessageDialog(this, message, "Information", message_type);
 				}
@@ -157,8 +156,8 @@ public class GuiFrame extends JFrame {
 			default:
 				throw new InvalidParameterException("Unknown message type.");
 		}
-		if (terminal_panel != null) {
-			terminal_panel.echo(String.format("[%s] %s", message_type_string, message));
+		if (log_panel != null) {
+			log_panel.echo(String.format("[%s] %s", message_type_string, message));
 		} else {
 			JOptionPane.showMessageDialog(this, message, message_type_string, message_type);
 		}

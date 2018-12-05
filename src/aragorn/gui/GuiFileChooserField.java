@@ -1,7 +1,6 @@
 package aragorn.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -17,19 +16,6 @@ import javax.swing.JTextField;
  */
 @SuppressWarnings("serial")
 public abstract class GuiFileChooserField extends GuiPanel {
-
-	public static void main(String[] args) {
-		GuiFrame frame = new GuiFrame(new Dimension(800, 450), false) {
-			@Override
-			protected void editContentPane() {
-				terminal_panel = new GuiTerminalPanel();
-
-				getContentPane().addComponent(new GuiFileChooserField.Save(this), 0, 0, 1, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL);
-				getContentPane().addComponent(terminal_panel, 0, 1, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH);
-			}
-		};
-		frame.setVisible(true);
-	}
 
 	/**
 	 * {@code GuiFileChooserField.Open} is the implement for the input of the file I/O chooser field.

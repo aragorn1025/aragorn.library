@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class GuiTerminalPanel extends GuiPanel {
+public class GuiLogPanel extends GuiPanel {
 
 	private JTextArea text_area = new JTextArea();
 
@@ -16,7 +16,7 @@ public class GuiTerminalPanel extends GuiPanel {
 
 	private int default_width;
 
-	public GuiTerminalPanel() {
+	public GuiLogPanel() {
 		super("Output");
 
 		text_area.setEditable(false);
@@ -30,7 +30,7 @@ public class GuiTerminalPanel extends GuiPanel {
 		this.default_width = getPreferredSize().width;
 	}
 
-	public GuiTerminalPanel(int max_message_number) {
+	public GuiLogPanel(int max_message_number) {
 		this();
 		setMaxMessageNumber(max_message_number);
 	}
