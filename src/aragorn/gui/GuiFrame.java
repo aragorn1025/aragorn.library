@@ -10,8 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * {@code GuiFrame} is a frame which extends {@code javax.swing.JFrame} and uses {@code GuiPanel} as the content pane.<br>
- * Also, ask before close it.
+ * {@code GuiFrame} is a frame which extends {@code javax.swing.JFrame} and ask before close it.
  * 
  * @author Aragorn
  */
@@ -40,9 +39,6 @@ public class GuiFrame extends JFrame {
 		JFrame.setDefaultLookAndFeelDecorated(default_look_and_feel_decorated);
 		JDialog.setDefaultLookAndFeelDecorated(default_look_and_feel_decorated);
 	}
-
-	/** The default content pane which is {@code GuiPanel} for {@code GuiFrame}. */
-	private GuiPanel content_pane = new GuiPanel();
 
 	/** The timer using in {@code GuiFrame}. */
 	private GuiTimer timer = null;
@@ -78,7 +74,6 @@ public class GuiFrame extends JFrame {
 	 */
 	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
 		editContentPane();
-		setContentPane(this.content_pane);
 
 		setSize(dimension);
 		setLocationRelativeTo(null);
@@ -100,7 +95,7 @@ public class GuiFrame extends JFrame {
 				@Override
 				protected void run() {
 					_run();
-					content_pane.repaint();
+					getContentPane().repaint();
 				}
 			};
 		}
@@ -108,6 +103,10 @@ public class GuiFrame extends JFrame {
 
 	private void _run() {
 		run();
+	}
+
+	public void clearLogPanel() {
+		log_panel.clear();
 	}
 
 	/**
@@ -165,11 +164,6 @@ public class GuiFrame extends JFrame {
 
 	/** Initial content pane as creating {@code GuiFrame}. */
 	protected void editContentPane() {
-	}
-
-	@Override
-	public GuiPanel getContentPane() {
-		return content_pane;
 	}
 
 	public boolean isPlaying() {

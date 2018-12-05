@@ -35,6 +35,10 @@ public class GuiLogPanel extends GuiPanel {
 		setMaxMessageNumber(max_message_number);
 	}
 
+	public void clear() {
+		log.clear();
+	}
+
 	public void echo(String message) {
 		log.add(message);
 		text_area.setText(log.get());

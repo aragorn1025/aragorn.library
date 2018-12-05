@@ -32,6 +32,11 @@ public class Log {
 		}
 	}
 
+	public void clear() {
+		messages.clear();
+		message_number = 0;
+	}
+
 	public String get() {
 		return log;
 	}
