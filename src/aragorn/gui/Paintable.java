@@ -3,8 +3,7 @@ package aragorn.gui;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-
-import aragorn.math.MathVector2D;
+import aragorn.util.MathVector2D;
 
 /**
  * A class implements the {@code Paintable} interface indicates that it can be painted on the panel.

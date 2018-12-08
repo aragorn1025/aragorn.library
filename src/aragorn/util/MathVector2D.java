@@ -1,4 +1,4 @@
-package aragorn.math;
+package aragorn.util;
 
 import java.awt.geom.Point2D;
 

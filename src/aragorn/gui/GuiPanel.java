@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.security.InvalidParameterException;
-
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -116,8 +115,7 @@ public class GuiPanel extends JPanel {
 	 *            the custom insets, for setting horizontal and vertical margin length
 	 * @see <a target="_blank" href= "https://docs.oracle.com/javase/8/docs/api/java/awt/GridBagConstraints.html">GridBagConstraints</a>
 	 */
-	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill,
-			Insets insets) {
+	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill, Insets insets) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = grid_x;
 		gbc.gridy = grid_y;

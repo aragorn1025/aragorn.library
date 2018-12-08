@@ -2,8 +2,7 @@ package aragorn.gui;
 
 import java.awt.geom.Point2D;
 import java.security.InvalidParameterException;
-
-import aragorn.math.MathVector2D;
+import aragorn.util.MathVector2D;
 
 /**
  * {@code Coordinate2D} is a converter which convert (x, y) value on the coordinate to the panel by the center and the unit vector.
@@ -109,11 +108,11 @@ public class Coordinate2D {
 	 * Set the unit vector of the each axis on the panel.
 	 * 
 	 * @param unit_x
-	 *            the unit vector of the x-axis. If the value of the vector is positive, the positive way of the coordinate will be the right of the panel. Otherwise, if
-	 *            the value of the vector is negative, the positive way of the coordinate will be the left of the panel. The value can't be 0.
+	 *            the unit vector of the x-axis. If the value of the vector is positive, the positive way of the coordinate will be the right of the panel. Otherwise, if the value
+	 *            of the vector is negative, the positive way of the coordinate will be the left of the panel. The value can't be 0.
 	 * @param unit_y
-	 *            the unit vector of the y-axis. If the value of the vector is positive, the positive way of the coordinate will be the top of the panel. Otherwise, if the
-	 *            value of the vector is negative, the positive way of the coordinate will be the bottom of the panel. The value can't be 0.
+	 *            the unit vector of the y-axis. If the value of the vector is positive, the positive way of the coordinate will be the top of the panel. Otherwise, if the value of
+	 *            the vector is negative, the positive way of the coordinate will be the bottom of the panel. The value can't be 0.
 	 */
 	public void setUnit(double unit_x, double unit_y) {
 		if (!Double.isFinite(unit_x) || unit_x == 0.0)
