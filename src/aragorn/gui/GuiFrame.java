@@ -72,8 +72,6 @@ public class GuiFrame extends JFrame {
 	 *            Disable the timer if it's non-positive.
 	 */
 	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
-		editContentPane();
-
 		setSize(dimension);
 		setLocationRelativeTo(null);
 
@@ -105,7 +103,7 @@ public class GuiFrame extends JFrame {
 	}
 
 	public void clearLogPanel() {
-		log_panel.clear();
+		getLogPanel().clear();
 	}
 
 	/**
@@ -133,8 +131,8 @@ public class GuiFrame extends JFrame {
 		String message_type_string;
 		switch (message_type) {
 			case GuiFrame.PLAIN_MESSAGE:
-				if (log_panel != null) {
-					log_panel.echo(message);
+				if (getLogPanel() != null) {
+					getLogPanel().echo(message);
 				} else {
 					JOptionPane.showMessageDialog(this, message, "Information", message_type);
 				}
@@ -154,15 +152,21 @@ public class GuiFrame extends JFrame {
 			default:
 				throw new InvalidParameterException("Unknown message type.");
 		}
-		if (log_panel != null) {
-			log_panel.echo(String.format("[%s] %s", message_type_string, message));
+		if (getLogPanel() != null) {
+			getLogPanel().echo(String.format("[%s] %s", message_type_string, message));
 		} else {
 			JOptionPane.showMessageDialog(this, message, message_type_string, message_type);
 		}
 	}
 
-	/** Initial content pane as creating {@code GuiFrame}. */
-	protected void editContentPane() {
+	private GuiLogPanel getLogPanel() {
+		if (log_panel == null)
+			throw new NullPointerException("No log panel being set.");
+		return log_panel;
+	}
+
+	public void setLogPanel(GuiLogPanel log_panel) {
+		this.log_panel = log_panel;
 	}
 
 	public boolean isPlaying() {

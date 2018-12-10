@@ -5,9 +5,9 @@ import java.util.Queue;
 
 public class EvictingQueue<E> {
 
-	private Queue<E> queue = new LinkedList<>();
-
 	private int max_size;
+
+	private Queue<E> queue = new LinkedList<>();
 
 	public EvictingQueue(int max_size) {
 		this.max_size = max_size;
@@ -25,14 +25,14 @@ public class EvictingQueue<E> {
 		return queue.size() == max_size;
 	}
 
-	public E poll() {
-		return queue.poll();
-	}
-
 	public boolean offer(E e) {
 		if (isFull()) {
 			queue.poll();
 		}
 		return queue.offer(e);
+	}
+
+	public E poll() {
+		return queue.poll();
 	}
 }
