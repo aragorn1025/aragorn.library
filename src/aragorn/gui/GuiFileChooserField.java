@@ -74,12 +74,12 @@ public abstract class GuiFileChooserField extends GuiPanel {
 		}
 	}
 
-	/** The text field to print the directory of the chosen file. */
-	protected JTextField field = new JTextField();
-
 	protected JButton button = new JButton();
 
 	protected GuiFileChooser chooser;
+
+	/** The text field to print the directory of the chosen file. */
+	protected JTextField field = new JTextField();
 
 	/** Create the file chooser field within a text filed for the path of the chosen file and a button to access the file chooser. */
 	protected GuiFileChooserField() {

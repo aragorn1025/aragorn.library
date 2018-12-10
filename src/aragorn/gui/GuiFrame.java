@@ -16,15 +16,15 @@ import javax.swing.JOptionPane;
 @SuppressWarnings("serial")
 public class GuiFrame extends JFrame {
 
-	public static final int PLAIN_MESSAGE = JOptionPane.PLAIN_MESSAGE;
-
 	public static final int ERROR_MESSAGE = JOptionPane.ERROR_MESSAGE;
 
 	public static final int INFORMATION_MESSAGE = JOptionPane.INFORMATION_MESSAGE;
 
-	public static final int WARNING_MESSAGE = JOptionPane.WARNING_MESSAGE;
+	public static final int PLAIN_MESSAGE = JOptionPane.PLAIN_MESSAGE;
 
 	public static final int QUESTION_MESSAGE = JOptionPane.QUESTION_MESSAGE;
+
+	public static final int WARNING_MESSAGE = JOptionPane.WARNING_MESSAGE;
 
 	/**
 	 * Set default look and feel decorated for frames and dialogs.
@@ -39,10 +39,10 @@ public class GuiFrame extends JFrame {
 		JDialog.setDefaultLookAndFeelDecorated(default_look_and_feel_decorated);
 	}
 
+	protected GuiLogPanel log_panel = null;
+
 	/** The timer using in {@code GuiFrame}. */
 	private GuiTimer timer = null;
-
-	protected GuiLogPanel log_panel = null;
 
 	/**
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane.
@@ -161,8 +161,8 @@ public class GuiFrame extends JFrame {
 		}
 	}
 
-	public void setLogPanel(GuiLogPanel log_panel) {
-		this.log_panel = log_panel;
+	public GuiLogPanel getLogPanel() {
+		return log_panel;
 	}
 
 	public boolean isPlaying() {
@@ -185,6 +185,10 @@ public class GuiFrame extends JFrame {
 
 	/** Edit timer task run. */
 	protected void run() {
+	}
+
+	public void setLogPanel(GuiLogPanel log_panel) {
+		this.log_panel = log_panel;
 	}
 
 	public int terminate() {

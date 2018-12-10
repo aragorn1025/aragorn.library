@@ -9,11 +9,11 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class GuiLogPanel extends GuiPanel {
 
-	private JTextArea text_area = new JTextArea();
+	private int default_width;
 
 	private Log log = new Log();
 
-	private int default_width;
+	private JTextArea text_area = new JTextArea();
 
 	public GuiLogPanel() {
 		super("Output");

@@ -5,13 +5,13 @@ import java.util.Queue;
 
 public class Log {
 
-	private Queue<String> messages = new LinkedList<>();
-
-	private int message_number = 0;
+	private String log = new String("");
 
 	private int max_message_number;
 
-	private String log = new String("");
+	private int message_number = 0;
+
+	private Queue<String> messages = new LinkedList<>();
 
 	public Log() {
 		this(200);
