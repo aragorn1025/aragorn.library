@@ -103,7 +103,9 @@ public class GuiFrame extends JFrame {
 	}
 
 	public void clearLogPanel() {
-		getLogPanel().clear();
+		if (log_panel == null)
+			throw new NullPointerException("No log panel being set.");
+		log_panel.clear();
 	}
 
 	/**
@@ -131,8 +133,8 @@ public class GuiFrame extends JFrame {
 		String message_type_string;
 		switch (message_type) {
 			case GuiFrame.PLAIN_MESSAGE:
-				if (getLogPanel() != null) {
-					getLogPanel().echo(message);
+				if (log_panel != null) {
+					log_panel.echo(message);
 				} else {
 					JOptionPane.showMessageDialog(this, message, "Information", message_type);
 				}
@@ -152,17 +154,11 @@ public class GuiFrame extends JFrame {
 			default:
 				throw new InvalidParameterException("Unknown message type.");
 		}
-		if (getLogPanel() != null) {
-			getLogPanel().echo(String.format("[%s] %s", message_type_string, message));
+		if (log_panel != null) {
+			log_panel.echo(String.format("[%s] %s", message_type_string, message));
 		} else {
 			JOptionPane.showMessageDialog(this, message, message_type_string, message_type);
 		}
-	}
-
-	private GuiLogPanel getLogPanel() {
-		if (log_panel == null)
-			throw new NullPointerException("No log panel being set.");
-		return log_panel;
 	}
 
 	public void setLogPanel(GuiLogPanel log_panel) {
