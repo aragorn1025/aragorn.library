@@ -16,7 +16,7 @@ public class GuiLogPanel extends GuiPanel {
 	private JTextArea text_area = new JTextArea();
 
 	public GuiLogPanel() {
-		super("Output");
+		super("Log");
 
 		text_area.setEditable(false);
 		text_area.setBackground(Color.WHITE);

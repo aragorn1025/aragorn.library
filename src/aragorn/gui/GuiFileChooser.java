@@ -149,8 +149,10 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 	 * @param parent
 	 *            the parent
 	 * @return the return state of the file chooser
-	 * @see <a target="_blank" href= "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showOpenDialog-java.awt.Component-">JFileChooser.showOpenDialog</a>
-	 * @see <a target="_blank" href= "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showSaveDialog-java.awt.Component-">JFileChooser.showSaveDialog</a>
+	 * @see <a target="_blank" href=
+	 *      "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showOpenDialog-java.awt.Component-">JFileChooser.showOpenDialog</a>
+	 * @see <a target="_blank" href=
+	 *      "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showSaveDialog-java.awt.Component-">JFileChooser.showSaveDialog</a>
 	 */
 	public abstract int showDialog(Component parent);
 }

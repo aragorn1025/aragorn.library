@@ -116,7 +116,7 @@ public class GuiFrame extends JFrame {
 	public void close() {
 		boolean is_playing_before = isPlaying();
 		this.pause();
-		String[] exit_pane_buttons = { "Yes", "No" };
+		String[] exit_pane_buttons = {"Yes", "No"};
 		int n = JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Exit", 0, 2, null, exit_pane_buttons, exit_pane_buttons[0]);
 		if (n == 0) {
 			terminate();
