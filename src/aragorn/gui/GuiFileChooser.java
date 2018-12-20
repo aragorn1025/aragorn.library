@@ -129,7 +129,6 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 	protected GuiFileChooser(GuiFrame parent) {
 		super();
 		this.parent = parent;
-		setCurrentDirectory(null);
 		setMultiSelectionEnabled(false);
 		for (int i = getChoosableFileFilters().length; i > 0; i--) {
 			removeChoosableFileFilter(getChoosableFileFilters()[i - 1]);
