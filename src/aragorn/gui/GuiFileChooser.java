@@ -60,9 +60,9 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 		 * To normalize the output file name with extension if user did not type extension.
 		 * 
 		 * @param file
-		 *            the file pointer
+		 *     the file pointer
 		 * @param extension
-		 *            the file extension
+		 *     the file extension
 		 * @return If user typed file extension correctly, return the file name, else return the file name with extension.
 		 */
 		private static String toNormalizedFilePathString(File file, String extension) {
@@ -146,12 +146,12 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 	 * Show the open dialog or the save dialog.
 	 * 
 	 * @param parent
-	 *            the parent
+	 *     the parent
 	 * @return the return state of the file chooser
 	 * @see <a target="_blank" href=
-	 *      "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showOpenDialog-java.awt.Component-">JFileChooser.showOpenDialog</a>
+	 * "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showOpenDialog-java.awt.Component-">JFileChooser.showOpenDialog</a>
 	 * @see <a target="_blank" href=
-	 *      "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showSaveDialog-java.awt.Component-">JFileChooser.showSaveDialog</a>
+	 * "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html#showSaveDialog-java.awt.Component-">JFileChooser.showSaveDialog</a>
 	 */
 	public abstract int showDialog(Component parent);
 }

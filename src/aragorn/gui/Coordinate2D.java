@@ -29,11 +29,11 @@ public class Coordinate2D {
 	 * Create Coordinate2D by the center and the unit vector of each axis.
 	 * 
 	 * @param center
-	 *            the location of the center on the panel
+	 *     the location of the center on the panel
 	 * @param unit_x
-	 *            the unit vector of the x-axis
+	 *     the unit vector of the x-axis
 	 * @param unit_y
-	 *            the unit vector of the y-axis
+	 *     the unit vector of the y-axis
 	 */
 	public Coordinate2D(Point2D.Double center, double unit_x, double unit_y) {
 		setCenter(center);
@@ -44,7 +44,7 @@ public class Coordinate2D {
 	 * Convert the vector on the coordinate to the panel.
 	 * 
 	 * @param vector
-	 *            the vector on the coordinate
+	 *     the vector on the coordinate
 	 * @return the vector on the panel
 	 */
 	public MathVector2D convertToPanel(MathVector2D vector) {
@@ -55,7 +55,7 @@ public class Coordinate2D {
 	 * Convert the point on the coordinate to the panel.
 	 * 
 	 * @param point
-	 *            the point on the coordinate
+	 *     the point on the coordinate
 	 * @return the point on the panel
 	 */
 	public Point2D.Double convertToPanel(Point2D.Double point) {
@@ -66,7 +66,7 @@ public class Coordinate2D {
 	 * Revert the vector on the panel to the coordinate.
 	 * 
 	 * @param vector
-	 *            the vector on the panel
+	 *     the vector on the panel
 	 * @return the vector on the coordinate
 	 */
 	public MathVector2D revertToCoordinate(MathVector2D vector) {
@@ -77,7 +77,7 @@ public class Coordinate2D {
 	 * Revert the point on the panel to the coordinate.
 	 * 
 	 * @param point
-	 *            the point on the panel
+	 *     the point on the panel
 	 * @return the point on the coordinate
 	 */
 	public Point2D.Double revertToCoordinate(Point2D.Double point) {
@@ -88,7 +88,7 @@ public class Coordinate2D {
 	 * Set the location of the center on the panel.
 	 * 
 	 * @param center
-	 *            the location of the center on the panel
+	 *     the location of the center on the panel
 	 */
 	public void setCenter(Point2D.Double center) {
 		if (center == null)
@@ -108,11 +108,11 @@ public class Coordinate2D {
 	 * Set the unit vector of the each axis on the panel.
 	 * 
 	 * @param unit_x
-	 *            the unit vector of the x-axis. If the value of the vector is positive, the positive way of the coordinate will be the right of the panel. Otherwise, if
-	 *            the value of the vector is negative, the positive way of the coordinate will be the left of the panel. The value can't be 0.
+	 *     the unit vector of the x-axis. If the value of the vector is positive, the positive way of the coordinate will be the right of the panel. Otherwise, if the
+	 *     value of the vector is negative, the positive way of the coordinate will be the left of the panel. The value can't be 0.
 	 * @param unit_y
-	 *            the unit vector of the y-axis. If the value of the vector is positive, the positive way of the coordinate will be the top of the panel. Otherwise, if the
-	 *            value of the vector is negative, the positive way of the coordinate will be the bottom of the panel. The value can't be 0.
+	 *     the unit vector of the y-axis. If the value of the vector is positive, the positive way of the coordinate will be the top of the panel. Otherwise, if the value
+	 *     of the vector is negative, the positive way of the coordinate will be the bottom of the panel. The value can't be 0.
 	 */
 	public void setUnit(double unit_x, double unit_y) {
 		if (!Double.isFinite(unit_x) || unit_x == 0.0)

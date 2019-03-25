@@ -11,7 +11,7 @@ public class GuiLogPanel extends GuiPanel {
 
 	private int default_width;
 
-	private Log log = new Log();
+	private Log log;
 
 	private JTextArea text_area = new JTextArea();
 
@@ -31,7 +31,7 @@ public class GuiLogPanel extends GuiPanel {
 
 	public GuiLogPanel(int max_message_number) {
 		this();
-		setMaxMessageNumber(max_message_number);
+		log = new Log(max_message_number);
 	}
 
 	public void clear() {
@@ -51,9 +51,5 @@ public class GuiLogPanel extends GuiPanel {
 	@Override
 	public Dimension getMinimumSize() {
 		return new Dimension(default_width, super.getMinimumSize().height);
-	}
-
-	public void setMaxMessageNumber(int max_message_number) {
-		log.setMaxMessageNumber(max_message_number);
 	}
 }

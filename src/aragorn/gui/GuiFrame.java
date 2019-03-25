@@ -30,9 +30,9 @@ public class GuiFrame extends JFrame {
 	 * Set default look and feel decorated for frames and dialogs.
 	 * 
 	 * @param default_look_and_feel_decorated
-	 *            parameter to be set
+	 *     parameter to be set
 	 * @see <a target="_blank" href=
-	 *      "https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html#setDefaultLookAndFeelDecorated(boolean)">JFrame.setDefaultLookAndFeelDecorated(boolean)</a>
+	 * "https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html#setDefaultLookAndFeelDecorated(boolean)">JFrame.setDefaultLookAndFeelDecorated(boolean)</a>
 	 */
 	public static void setDefaultLookAndFeelDecorated(boolean default_look_and_feel_decorated) {
 		JFrame.setDefaultLookAndFeelDecorated(default_look_and_feel_decorated);
@@ -48,11 +48,11 @@ public class GuiFrame extends JFrame {
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane.
 	 * 
 	 * @param title
-	 *            the title of the {@code GuiFrame}
+	 *     the title of the {@code GuiFrame}
 	 * @param dimension
-	 *            the dimension of the {@code GuiFrame}
+	 *     the dimension of the {@code GuiFrame}
 	 * @param is_maximized_while_launch
-	 *            to maximize frame while launch
+	 *     to maximize frame while launch
 	 */
 	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch) {
 		this(dimension, is_maximized_while_launch, -1);
@@ -62,14 +62,14 @@ public class GuiFrame extends JFrame {
 	 * Create a {@code GuiFrame} which extends {@code JFrame} with {@code GuiPanel} as the content pane and using {@code java.util.Timer}.
 	 * 
 	 * @param title
-	 *            the title of the {@code GuiFrame}
+	 *     the title of the {@code GuiFrame}
 	 * @param dimension
-	 *            the dimension of the {@code GuiFrame}
+	 *     the dimension of the {@code GuiFrame}
 	 * @param is_maximized_while_launch
-	 *            is maximized frame while launch
+	 *     is maximized frame while launch
 	 * @param updating_period
-	 *            the period for timer that updates content pane on {@code GuiFrame}<br>
-	 *            Disable the timer if it's non-positive.
+	 *     the period for timer that updates content pane on {@code GuiFrame}<br>
+	 *     Disable the timer if it's non-positive.
 	 */
 	public GuiFrame(Dimension dimension, boolean is_maximized_while_launch, int updating_period) {
 		setSize(dimension);
@@ -116,7 +116,7 @@ public class GuiFrame extends JFrame {
 	public void close() {
 		boolean is_playing_before = isPlaying();
 		this.pause();
-		String[] exit_pane_buttons = {"Yes", "No"};
+		String[] exit_pane_buttons = { "Yes", "No" };
 		int n = JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Exit", 0, 2, null, exit_pane_buttons, exit_pane_buttons[0]);
 		if (n == 0) {
 			terminate();

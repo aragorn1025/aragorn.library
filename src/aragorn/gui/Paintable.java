@@ -16,13 +16,13 @@ public interface Paintable {
 	 * Draw a segment with starting point and a vector.
 	 * 
 	 * @param g
-	 *            the {@code Graphics} reference
+	 *     the {@code Graphics} reference
 	 * @param c
-	 *            the {@code Coordinate2D} reference
+	 *     the {@code Coordinate2D} reference
 	 * @param starting_point
-	 *            the starting point
+	 *     the starting point
 	 * @param vector
-	 *            the vector
+	 *     the vector
 	 */
 	public static void drawLine(Graphics g, Coordinate2D c, Point2D.Double starting_point, MathVector2D vector) {
 		Paintable.drawLine(g, c, starting_point, MathVector2D.add(starting_point, vector));
@@ -32,13 +32,13 @@ public interface Paintable {
 	 * Draw a segment with two end point.
 	 *
 	 * @param g
-	 *            the {@code Graphics} reference
+	 *     the {@code Graphics} reference
 	 * @param c
-	 *            the {@code Coordinate2D} reference
+	 *     the {@code Coordinate2D} reference
 	 * @param point_0
-	 *            the first point
+	 *     the first point
 	 * @param point_1
-	 *            the second point
+	 *     the second point
 	 */
 	public static void drawLine(Graphics g, Coordinate2D c, Point2D.Double point_0, Point2D.Double point_1) {
 		if (c == null) {
@@ -54,9 +54,9 @@ public interface Paintable {
 	 * To implement how to draw object.
 	 * 
 	 * @param g
-	 *            the {@code Graphics} reference
+	 *     the {@code Graphics} reference
 	 * @param c
-	 *            the {@code Coordinate2D} reference
+	 *     the {@code Coordinate2D} reference
 	 */
 	public void draw(Graphics g, Coordinate2D c);
 

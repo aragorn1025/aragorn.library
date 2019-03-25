@@ -15,7 +15,7 @@ public class GuiMenuItem extends JMenuItem {
 	 * Create {@code GuiMenuItem} with the text and set mnemonic by the first character.
 	 * 
 	 * @param text
-	 *            the text of the {@code GuiMenuItem}
+	 *     the text of the {@code GuiMenuItem}
 	 */
 	public GuiMenuItem(String text) {
 		this(text, text.charAt(0));
@@ -25,9 +25,9 @@ public class GuiMenuItem extends JMenuItem {
 	 * Create {@code GuiMenuItem} with the text and specific mnemonic.
 	 * 
 	 * @param text
-	 *            the text of the {@code GuiMenuItem}
+	 *     the text of the {@code GuiMenuItem}
 	 * @param mnemonic
-	 *            the mnemonic character to be set
+	 *     the mnemonic character to be set
 	 */
 	public GuiMenuItem(String text, char mnemonic) {
 		this.text = text;

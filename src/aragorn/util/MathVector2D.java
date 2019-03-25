@@ -35,28 +35,38 @@ public class MathVector2D implements Cloneable {
 	 * Add vector from the starting point.
 	 * 
 	 * @param starting_point
-	 *            the starting point
+	 *     the starting point
 	 * @param vector
-	 *            the vector to add
+	 *     the vector to add
 	 * @return the end point
 	 */
 	public static Point2D.Double add(Point2D.Double starting_point, MathVector2D vector) {
 		return new Point2D.Double(starting_point.getX() + vector.getX(), starting_point.getY() + vector.getY());
 	}
 
-	/** The end point of the vector assume that the start point is the origin (0, 0). */
+	/**
+	 * The end point of the vector assume that the start point is the origin (0, 0).
+	 */
 	private Point2D.Double end_point;
 
 	/**
 	 * Create a vector in mathematics
 	 * 
 	 * @param x
-	 *            the x value of the vector
+	 *     the x value of the vector
 	 * @param y
-	 *            the y value of the vector
+	 *     the y value of the vector
 	 */
 	public MathVector2D(double x, double y) {
 		this.end_point = new Point2D.Double(x, y);
+	}
+
+	public MathVector2D(Point2D starting_point, Point2D end_point) {
+		this(end_point.getX() - starting_point.getX(), end_point.getY() - starting_point.getY());
+	}
+
+	public MathVector2D(MathVector2D math_vector_2d) {
+		this(math_vector_2d.getX(), math_vector_2d.getY());
 	}
 
 	/**
@@ -128,19 +138,19 @@ public class MathVector2D implements Cloneable {
 	 * Set the vector by the value of (x, y)
 	 * 
 	 * @param x
-	 *            the new x value of the vector
+	 *     the new x value of the vector
 	 * @param y
-	 *            the new y value of the vector
+	 *     the new y value of the vector
 	 */
 	public void set(double x, double y) {
-		this.end_point = new Point2D.Double(x, y);
+		this.end_point.setLocation(x, y);
 	}
 
 	/**
 	 * Set the vector by the other vector.
 	 * 
 	 * @param vector
-	 *            the new vector to be set
+	 *     the new vector to be set
 	 */
 	public void set(MathVector2D vector) {
 		if (vector == null)
@@ -152,6 +162,6 @@ public class MathVector2D implements Cloneable {
 
 	@Override
 	public String toString() {
-		return "MathVector2D [x=" + getX() + ", y=" + getY() + "]";
+		return String.format("MathVector2D [x=%f, y=%f]", getX(), getY());
 	}
 }

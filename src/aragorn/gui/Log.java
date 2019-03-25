@@ -1,51 +1,30 @@
 package aragorn.gui;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import aragorn.util.EvictingQueue;
 
 public class Log {
 
 	private String log = new String("");
 
-	private int max_message_number;
-
-	private int message_number = 0;
-
-	private Queue<String> messages = new LinkedList<>();
-
-	public Log() {
-		this(200);
-	}
+	private EvictingQueue<String> queue;
 
 	public Log(int max_message_number) {
-		setMaxMessageNumber(max_message_number);
+		queue = new EvictingQueue<String>(max_message_number);
 	}
 
 	public void add(String message) {
-		messages.add(message);
-		log += (message + "\r\n");
-		if (message_number == max_message_number) {
-			String removed_message = messages.poll();
-			log = log.substring(removed_message.length() + 2);
-		} else {
-			message_number++;
+		if (queue.isFull()) {
+			log = log.substring(queue.peek().length() + 2);
 		}
+		log += (message + "\r\n");
+		queue.offer(message);
 	}
 
 	public void clear() {
-		messages.clear();
-		message_number = 0;
+		queue.clear();
 	}
 
 	public String get() {
 		return log;
-	}
-
-	public void setMaxMessageNumber(int max_message_number) {
-		if (max_message_number <= 0) {
-			this.max_message_number = -1;
-		} else {
-			this.max_message_number = max_message_number;
-		}
 	}
 }

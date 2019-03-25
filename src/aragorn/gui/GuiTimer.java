@@ -45,7 +45,7 @@ public abstract class GuiTimer extends Timer {
 			 * Set the next state which must be a play state.
 			 * 
 			 * @param play_state
-			 *            the next state for the pause state, which must be a play state
+			 *     the next state for the pause state, which must be a play state
 			 */
 			public void setPlayState(GuiTimer.State.Play play_state) {
 				this.play_state = play_state;
@@ -71,7 +71,7 @@ public abstract class GuiTimer extends Timer {
 			 * Set the next state which must be a pause state.
 			 * 
 			 * @param pause_state
-			 *            the next state for the play state, which must be a pause state
+			 *     the next state for the play state, which must be a pause state
 			 */
 			public void setPauseState(GuiTimer.State.Pause pause_state) {
 				this.pause_state = pause_state;

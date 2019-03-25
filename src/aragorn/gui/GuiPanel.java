@@ -35,7 +35,7 @@ public class GuiPanel extends JPanel {
 	 * Creates a {@code GuiPanel} which extends {@code JPanel} with {@code TitledBorder} and uses {@code GridBagLayout}.
 	 * 
 	 * @param title
-	 *            the title for {@code TitledBorder}
+	 *     the title for {@code TitledBorder}
 	 */
 	public GuiPanel(String title) {
 		setLayout(new GridBagLayout());
@@ -48,11 +48,11 @@ public class GuiPanel extends JPanel {
 	 * Add component to the chosen grid at the center.
 	 * 
 	 * @param component
-	 *            the component to be add
+	 *     the component to be add
 	 * @param grid_x
-	 *            the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
+	 *     the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
 	 * @param grid_y
-	 *            the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
+	 *     the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int, Insets)
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int)
 	 */
@@ -66,23 +66,23 @@ public class GuiPanel extends JPanel {
 	 * Add component on the grid with chosen anchor, chosen fill and default margin.
 	 * 
 	 * @param component
-	 *            the component to be add
+	 *     the component to be add
 	 * @param grid_x
-	 *            the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
+	 *     the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
 	 * @param grid_y
-	 *            the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
+	 *     the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
 	 * @param grid_width
-	 *            the non-negative number of grids used by the component in the row, and its default value is {@code 1}
+	 *     the non-negative number of grids used by the component in the row, and its default value is {@code 1}
 	 * @param grid_height
-	 *            the non-negative number of grids used by the component in the column, and its default value is {@code 1}
+	 *     the non-negative number of grids used by the component in the column, and its default value is {@code 1}
 	 * @param weight_x
-	 *            the non-negative weight value in row, and its default value is {@code 0}
+	 *     the non-negative weight value in row, and its default value is {@code 0}
 	 * @param weight_y
-	 *            the non-negative weight value in column, and its default value is {@code 0}
+	 *     the non-negative weight value in column, and its default value is {@code 0}
 	 * @param anchor
-	 *            determines where, within the display area, to place the component, and its default value is {@code CENTER}
+	 *     determines where, within the display area, to place the component, and its default value is {@code CENTER}
 	 * @param fill
-	 *            determines whether and how to resize the component,and its default value is {@code NONE}
+	 *     determines whether and how to resize the component,and its default value is {@code NONE}
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int, Insets)
 	 */
 	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill) {
@@ -94,25 +94,25 @@ public class GuiPanel extends JPanel {
 	 * Add component with almost all constraints to the grid.
 	 * 
 	 * @param component
-	 *            the component to be add
+	 *     the component to be add
 	 * @param grid_x
-	 *            the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
+	 *     the grid location of x which should be non-negative, and the first cell in a row has {@code grid_x=0}
 	 * @param grid_y
-	 *            the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
+	 *     the grid location of y which should be non-negative, and the first cell in a column has {@code grid_y=0}
 	 * @param grid_width
-	 *            the non-negative number of grids used by the component in the row, and its default value is {@code 1}
+	 *     the non-negative number of grids used by the component in the row, and its default value is {@code 1}
 	 * @param grid_height
-	 *            the non-negative number of grids used by the component in the column, and its default value is {@code 1}
+	 *     the non-negative number of grids used by the component in the column, and its default value is {@code 1}
 	 * @param weight_x
-	 *            the non-negative weight value in row, and its default value is {@code 0}
+	 *     the non-negative weight value in row, and its default value is {@code 0}
 	 * @param weight_y
-	 *            the non-negative weight value in column, and its default value is {@code 0}
+	 *     the non-negative weight value in column, and its default value is {@code 0}
 	 * @param anchor
-	 *            determines where, within the display area, to place the component, and its default value is {@code CENTER}
+	 *     determines where, within the display area, to place the component, and its default value is {@code CENTER}
 	 * @param fill
-	 *            determines whether and how to resize the component,and its default value is {@code NONE}
+	 *     determines whether and how to resize the component,and its default value is {@code NONE}
 	 * @param insets
-	 *            the custom insets, for setting horizontal and vertical margin length
+	 *     the custom insets, for setting horizontal and vertical margin length
 	 * @see <a target="_blank" href= "https://docs.oracle.com/javase/8/docs/api/java/awt/GridBagConstraints.html">GridBagConstraints</a>
 	 */
 	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill,
@@ -135,9 +135,9 @@ public class GuiPanel extends JPanel {
 	 * The margin should be non-negative and its default value is {@code 0}.
 	 * 
 	 * @param margin
-	 *            the new margin to be set
+	 *     the new margin to be set
 	 * @throws InvalidParameterException
-	 *             if the value of the margin is negative
+	 *     if the value of the margin is negative
 	 */
 	public void setDefaultMargin(int margin) {
 		if (margin < 0)

@@ -10,7 +10,7 @@ public class EvictingQueue<E> {
 	private Queue<E> queue = new LinkedList<>();
 
 	public EvictingQueue(int max_size) {
-		this.max_size = max_size;
+		this.max_size = (max_size > 0) ? max_size : -1;
 	}
 
 	public void clear() {
@@ -30,6 +30,10 @@ public class EvictingQueue<E> {
 			queue.poll();
 		}
 		return queue.offer(e);
+	}
+
+	public E peek() {
+		return queue.peek();
 	}
 
 	public E poll() {
