@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
@@ -31,6 +30,7 @@ public class GuiFileChooserField extends GuiPanel {
 		public Open(GuiFrame parent) {
 			super();
 			setFileChooser(new GuiFileChooser.Open(parent) {
+
 				@Override
 				public void actionPerformed(ActionEvent event) {
 					super.actionPerformed(event);
@@ -58,6 +58,7 @@ public class GuiFileChooserField extends GuiPanel {
 		public Save(GuiFrame parent) {
 			super();
 			setFileChooser(new GuiFileChooser.Save(parent) {
+
 				@Override
 				public void actionPerformed(ActionEvent event) {
 					super.actionPerformed(event);

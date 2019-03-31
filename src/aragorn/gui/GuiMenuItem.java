@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
  */
 @SuppressWarnings("serial")
 public class GuiMenuItem extends JMenuItem {
+
 	private String text = "";
 
 	/**

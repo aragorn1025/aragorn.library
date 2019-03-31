@@ -81,6 +81,7 @@ public class GuiFrame extends JFrame {
 
 		setDefaultCloseOperation(0);
 		addWindowListener(new WindowAdapter() {
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 				GuiFrame.this.close();
@@ -89,6 +90,7 @@ public class GuiFrame extends JFrame {
 
 		if (updating_period > 0) {
 			timer = new GuiTimer(updating_period) {
+
 				@Override
 				protected void run() {
 					_run();

@@ -100,6 +100,7 @@ public abstract class GuiTimer extends Timer {
 	public GuiTimer(int updating_period) {
 		super(true);
 		current_state = new State.Pause(new State.Play() {
+
 			@Override
 			public void run() {
 				run_();
@@ -107,6 +108,7 @@ public abstract class GuiTimer extends Timer {
 		});
 
 		this.scheduleAtFixedRate(new TimerTask() {
+
 			@Override
 			public void run() {
 				getCurrentState().run();

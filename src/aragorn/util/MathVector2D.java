@@ -7,10 +7,17 @@ import java.awt.geom.Point2D;
  * 
  * @author Aragorn
  */
-public class MathVector2D implements Cloneable {
+public class MathVector2D extends MathVector {
 
 	/**
 	 * Add vectors.
+	 * 
+	 * @param vector_0
+	 *     the first vector to add
+	 * @param vector_1
+	 *     the second vector to add
+	 * @param vectors
+	 *     (optional) the other vectors to add
 	 */
 	public static MathVector2D add(MathVector2D vector_0, MathVector2D vector_1, MathVector2D... vectors) {
 		if (vector_0 == null)
@@ -36,21 +43,26 @@ public class MathVector2D implements Cloneable {
 	 * 
 	 * @param starting_point
 	 *     the starting point
-	 * @param vector
-	 *     the vector to add
+	 * @param vector_0
+	 *     the first vector to add
+	 * @param vectors
+	 *     (optional) the other vectors to add
 	 * @return the end point
 	 */
-	public static Point2D.Double add(Point2D.Double starting_point, MathVector2D vector) {
+	public static Point2D.Double add(Point2D.Double starting_point, MathVector2D vector_0, MathVector2D... vectors) {
+		MathVector2D vector = MathVector2D.add(vector_0, new MathVector2D(0, 0), vectors);
 		return new Point2D.Double(starting_point.getX() + vector.getX(), starting_point.getY() + vector.getY());
 	}
 
 	/**
-	 * The end point of the vector assume that the start point is the origin (0, 0).
+	 * Create the vector (0, 0) in mathematics.
 	 */
-	private Point2D.Double end_point;
+	public MathVector2D() {
+		this(0, 0);
+	}
 
 	/**
-	 * Create a vector in mathematics
+	 * Create a vector in mathematics.
 	 * 
 	 * @param x
 	 *     the x value of the vector
@@ -58,10 +70,10 @@ public class MathVector2D implements Cloneable {
 	 *     the y value of the vector
 	 */
 	public MathVector2D(double x, double y) {
-		this.end_point = new Point2D.Double(x, y);
+		super(x, y);
 	}
 
-	public MathVector2D(Point2D starting_point, Point2D end_point) {
+	public MathVector2D(Point2D.Double starting_point, Point2D.Double end_point) {
 		this(end_point.getX() - starting_point.getX(), end_point.getY() - starting_point.getY());
 	}
 
@@ -77,38 +89,13 @@ public class MathVector2D implements Cloneable {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		MathVector2D clone_object = (MathVector2D) super.clone();
-		clone_object.end_point = (Point2D.Double) end_point.clone();
-		return clone_object;
+	public MathVector2D getNegative() {
+		return (MathVector2D) super.getNegative();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MathVector2D other = (MathVector2D) obj;
-		if (end_point == null) {
-			if (other.end_point != null) {
-				return false;
-			}
-		} else if (!end_point.equals(other.end_point)) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Get Euclidean distance of the vector.
-	 * 
-	 * @return the length of the vector
-	 */
-	public double getLength() {
-		return end_point.distance(new Point2D.Double(0, 0));
+	public MathVector2D getScalarMultiply(double multiplier) {
+		return (MathVector2D) super.getScalarMultiply(multiplier);
 	}
 
 	/**
@@ -117,7 +104,7 @@ public class MathVector2D implements Cloneable {
 	 * @return the x value of the vector
 	 */
 	public double getX() {
-		return end_point.getX();
+		return getComponent(0);
 	}
 
 	/**
@@ -126,12 +113,7 @@ public class MathVector2D implements Cloneable {
 	 * @return the y value of the vector
 	 */
 	public double getY() {
-		return end_point.getY();
-	}
-
-	@Override
-	public int hashCode() {
-		return 31 + ((end_point == null) ? 0 : end_point.hashCode());
+		return getComponent(1);
 	}
 
 	/**
@@ -143,7 +125,8 @@ public class MathVector2D implements Cloneable {
 	 *     the new y value of the vector
 	 */
 	public void set(double x, double y) {
-		this.end_point.setLocation(x, y);
+		this.n[0] = x;
+		this.n[1] = y;
 	}
 
 	/**
