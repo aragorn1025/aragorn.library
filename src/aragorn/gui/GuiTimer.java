@@ -89,8 +89,14 @@ public abstract class GuiTimer extends Timer {
 		public void run();
 	}
 
+	private static final int IS_PLAYING = 1;
+
+	private static final int IS_PAUSEING = 0;
+
 	/** The task state that hold the current timer state. */
 	private GuiTimer.State current_state;
+
+	private int current_state_code;
 
 	/**
 	 * Create timer with the updating period for the task.
@@ -106,6 +112,7 @@ public abstract class GuiTimer extends Timer {
 				run_();
 			}
 		});
+		current_state_code = 0;
 
 		this.scheduleAtFixedRate(new TimerTask() {
 
@@ -122,13 +129,14 @@ public abstract class GuiTimer extends Timer {
 
 	/** Return true if the state of the timer is playing, else return false. */
 	public boolean isPlaying() {
-		return current_state.getClass().equals(GuiTimer.State.Play.class);
+		return current_state_code == IS_PLAYING;
 	}
 
 	/** Stop timer by switching task state from playing to pausing. */
 	public void pause() {
 		if (isPlaying()) {
 			current_state = current_state.getNextState();
+			current_state_code = IS_PAUSEING;
 		}
 	}
 
@@ -136,6 +144,7 @@ public abstract class GuiTimer extends Timer {
 	public void play() {
 		if (!isPlaying()) {
 			current_state = current_state.getNextState();
+			current_state_code = IS_PLAYING;
 		}
 	}
 
