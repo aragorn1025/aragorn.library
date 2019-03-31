@@ -18,13 +18,13 @@ public class MathUtilities {
 	 * @return the value of the determinant, that is (a_0_0 * a_1_1 - a_0_1 * a_1_0)
 	 */
 	public static double determinant_2_2(double a_0_0, double a_1_0, double a_0_1, double a_1_1) {
-		if (Double.isFinite(a_0_0))
+		if (!Double.isFinite(a_0_0))
 			throw new InvalidParameterException("Input parameter for determinant a_1_1 should be a finite number.");
-		if (Double.isFinite(a_1_0))
+		if (!Double.isFinite(a_1_0))
 			throw new InvalidParameterException("Input parameter for determinant a_2_1 should be a finite number.");
-		if (Double.isFinite(a_0_1))
+		if (!Double.isFinite(a_0_1))
 			throw new InvalidParameterException("Input parameter for determinant a_1_2 should be a finite number.");
-		if (Double.isFinite(a_1_1))
+		if (!Double.isFinite(a_1_1))
 			throw new InvalidParameterException("Input parameter for determinant a_2_2 should be a finite number.");
 		return a_0_0 * a_1_1 - a_0_1 * a_1_0;
 	}
