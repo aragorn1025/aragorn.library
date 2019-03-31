@@ -2,7 +2,7 @@ package aragorn.util;
 
 import java.util.ArrayList;
 
-public class Utils {
+public class Utilities {
 
 	public static <E> E getLast(ArrayList<E> list) {
 		return getLast(list, 0);

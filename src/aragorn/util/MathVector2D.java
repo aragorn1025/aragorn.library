@@ -73,12 +73,12 @@ public class MathVector2D extends MathVector {
 		super(x, y);
 	}
 
-	public MathVector2D(Point2D.Double starting_point, Point2D.Double end_point) {
-		this(end_point.getX() - starting_point.getX(), end_point.getY() - starting_point.getY());
-	}
-
 	public MathVector2D(MathVector2D math_vector_2d) {
 		this(math_vector_2d.getX(), math_vector_2d.getY());
+	}
+
+	public MathVector2D(Point2D.Double starting_point, Point2D.Double end_point) {
+		this(end_point.getX() - starting_point.getX(), end_point.getY() - starting_point.getY());
 	}
 
 	/**
