@@ -3,10 +3,10 @@ package aragorn.util;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-import aragorn.gui.Coordinate2D;
-import aragorn.gui.Paintable;
+import aragorn.gui.GuiCoordinate2D;
+import aragorn.gui.GuiPaintable;
 
-public class MathGeometryParallelogram2D implements Paintable {
+public class MathGeometryParallelogram2D implements GuiPaintable {
 
 	private MathGeometryPolyline2D polyline;
 
@@ -48,7 +48,7 @@ public class MathGeometryParallelogram2D implements Paintable {
 	}
 
 	@Override
-	public void draw(Graphics g, Coordinate2D c) {
+	public void draw(Graphics g, GuiCoordinate2D c) {
 		polyline.draw(g, c);
 	}
 

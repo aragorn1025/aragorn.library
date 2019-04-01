@@ -4,10 +4,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import aragorn.gui.Coordinate2D;
-import aragorn.gui.Paintable;
+import aragorn.gui.GuiCoordinate2D;
+import aragorn.gui.GuiPaintable;
 
-public class MathGeometryPolyline2D implements Paintable {
+public class MathGeometryPolyline2D implements GuiPaintable {
 
 	private ArrayList<Point2D.Double> points = new ArrayList<>();
 
@@ -55,9 +55,9 @@ public class MathGeometryPolyline2D implements Paintable {
 	}
 
 	@Override
-	public void draw(Graphics g, Coordinate2D c) {
+	public void draw(Graphics g, GuiCoordinate2D c) {
 		for (int i = 1; i < getPointsNumber(); i++) {
-			Paintable.drawLine(g, c, getPoint(i - 1), getPoint(i));
+			GuiPaintable.drawLine(g, c, getPoint(i - 1), getPoint(i));
 		}
 	}
 

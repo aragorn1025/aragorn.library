@@ -3,7 +3,7 @@ package aragorn.gui;
 import javax.swing.JMenuBar;
 
 /**
- * {@code MyMenuBar} is a menu bar which extends JMenuBar.
+ * {@code GuiMenuBar} is a menu bar which extends JMenuBar.
  * 
  * @author Aragorn
  */

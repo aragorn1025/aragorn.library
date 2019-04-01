@@ -11,7 +11,7 @@ public class GuiLogPanel extends GuiPanel {
 
 	private int default_width;
 
-	private Log log;
+	private GuiLog log;
 
 	private JTextArea text_area = new JTextArea();
 
@@ -31,7 +31,7 @@ public class GuiLogPanel extends GuiPanel {
 
 	public GuiLogPanel(int max_message_number) {
 		this();
-		log = new Log(max_message_number);
+		log = new GuiLog(max_message_number);
 	}
 
 	public void clear() {

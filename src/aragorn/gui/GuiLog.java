@@ -2,13 +2,13 @@ package aragorn.gui;
 
 import aragorn.util.EvictingQueue;
 
-public class Log {
+public class GuiLog {
 
 	private String log = new String("");
 
 	private EvictingQueue<String> queue;
 
-	public Log(int max_message_number) {
+	public GuiLog(int max_message_number) {
 		queue = new EvictingQueue<String>(max_message_number);
 	}
 

@@ -5,11 +5,11 @@ import java.security.InvalidParameterException;
 import aragorn.util.MathVector2D;
 
 /**
- * {@code Coordinate2D} is a converter which convert (x, y) value on the coordinate to the panel by the center and the unit vector.
+ * {@code GuiCoordinate2D} is a converter which convert (x, y) value on the coordinate to the panel by the center and the unit vector.
  * 
  * @author Aragorn
  */
-public class Coordinate2D {
+public class GuiCoordinate2D {
 
 	/** The location of the center on the panel. */
 	private Point2D.Double center;
@@ -20,13 +20,13 @@ public class Coordinate2D {
 	/** The unit vector of the y-axis. */
 	private double unit_y;
 
-	/** Create Coordinate2D that set the center by (0, 0) (the left top) and set the unit vector of x-axis to be 1, y-axis to be -1. */
-	public Coordinate2D() {
+	/** Create GuiCoordinate2D that set the center by (0, 0) (the left top) and set the unit vector of x-axis to be 1, y-axis to be -1. */
+	public GuiCoordinate2D() {
 		this(new Point2D.Double(0, 0), 1, -1);
 	}
 
 	/**
-	 * Create Coordinate2D by the center and the unit vector of each axis.
+	 * Create {@code GuiCoordinate2D} by the center and the unit vector of each axis.
 	 * 
 	 * @param center
 	 *     the location of the center on the panel
@@ -35,7 +35,7 @@ public class Coordinate2D {
 	 * @param unit_y
 	 *     the unit vector of the y-axis
 	 */
-	public Coordinate2D(Point2D.Double center, double unit_x, double unit_y) {
+	public GuiCoordinate2D(Point2D.Double center, double unit_x, double unit_y) {
 		setCenter(center);
 		setUnit(unit_x, unit_y);
 	}
