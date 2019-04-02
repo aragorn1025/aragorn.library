@@ -1,8 +1,8 @@
 package aragorn.gui;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import aragorn.util.MathVector2D;
 
 /**
@@ -61,9 +61,9 @@ public interface GuiPaintable {
 	public void draw(Graphics g, GuiCoordinate2D c);
 
 	/**
-	 * Returns an integer Rectangle that completely encloses the Paintable object.
+	 * Returns an Rectangle that completely encloses the {@code GuiPaintable) object.
 	 * 
-	 * @return an integer Rectangle that completely encloses the Paintable object
+	 * @return an Rectangle that completely encloses the {@code GuiPaintable) object
 	 */
-	public Rectangle getBounds();
+	public Rectangle2D.Double getBounds();
 }

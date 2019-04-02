@@ -1,8 +1,8 @@
 package aragorn.util;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import aragorn.gui.GuiCoordinate2D;
 import aragorn.gui.GuiPaintable;
 
@@ -52,8 +52,7 @@ public class MathGeometryParallelogram2D implements GuiPaintable {
 		polyline.draw(g, c);
 	}
 
-	@Override
-	public Rectangle getBounds() {
+	public Rectangle2D.Double getBounds() {
 		return polyline.getBounds();
 	}
 }

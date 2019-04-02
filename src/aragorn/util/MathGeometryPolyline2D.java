@@ -1,8 +1,8 @@
 package aragorn.util;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import aragorn.gui.GuiCoordinate2D;
 import aragorn.gui.GuiPaintable;
@@ -61,10 +61,9 @@ public class MathGeometryPolyline2D implements GuiPaintable {
 		}
 	}
 
-	@Override
-	public Rectangle getBounds() {
+	public Rectangle2D.Double getBounds() {
 		if (getPointsNumber() == 0)
-			return new Rectangle();
+			return new Rectangle2D.Double();
 		double x_min = points.get(0).getX();
 		double x_max = points.get(0).getX();
 		double y_min = points.get(0).getY();
@@ -75,11 +74,7 @@ public class MathGeometryPolyline2D implements GuiPaintable {
 			y_min = Math.min(y_min, points.get(i).getY());
 			y_max = Math.max(y_max, points.get(i).getY());
 		}
-		int x = (int) Math.floor(x_min);
-		int y = (int) Math.floor(y_min);
-		int w = (int) Math.ceil(x_max) - x;
-		int h = (int) Math.ceil(y_max) - y;
-		return new Rectangle(x, y, w, h);
+		return new Rectangle2D.Double(x_min, y_min, x_max - x_min, y_max - y_min);
 	}
 
 	public Point2D.Double getPoint(int index) {
