@@ -54,6 +54,10 @@ public class MathVector2D extends MathVector {
 		return new Point2D.Double(starting_point.getX() + vector.getX(), starting_point.getY() + vector.getY());
 	}
 
+	public static MathVector2D getScalarMultiply(MathVector2D vector, double multiplier) {
+		return vector.getScalarMultiply(multiplier);
+	}
+
 	/**
 	 * Create the vector (0, 0) in mathematics.
 	 */
@@ -62,7 +66,17 @@ public class MathVector2D extends MathVector {
 	}
 
 	/**
-	 * Create a vector in mathematics.
+	 * Create a unit vector which length is 1 in mathematics by phase.
+	 * 
+	 * @param phase
+	 *     the phase of the vector
+	 */
+	public MathVector2D(double phase) {
+		this(Math.cos(phase), Math.sin(phase));
+	}
+
+	/**
+	 * Create a vector in mathematics by x, y.
 	 * 
 	 * @param x
 	 *     the x value of the vector
