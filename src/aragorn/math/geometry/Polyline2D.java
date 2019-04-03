@@ -1,4 +1,4 @@
-package aragorn.util;
+package aragorn.math.geometry;
 
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
@@ -6,8 +6,9 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import aragorn.gui.GuiCoordinate2D;
 import aragorn.gui.GuiPaintable;
+import aragorn.util.MathVector2D;
 
-public class MathGeometryPolyline2D implements GuiPaintable {
+public class Polyline2D implements GuiPaintable {
 
 	private ArrayList<Point2D.Double> points = new ArrayList<>();
 
@@ -19,7 +20,7 @@ public class MathGeometryPolyline2D implements GuiPaintable {
 	 * @throws NullPointerException
 	 *     if any of the points is null
 	 */
-	public MathGeometryPolyline2D(Point2D.Double... points) {
+	public Polyline2D(Point2D.Double... points) {
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] == null) {
 				throw new NullPointerException("The input points should not be null.");
@@ -30,7 +31,7 @@ public class MathGeometryPolyline2D implements GuiPaintable {
 		}
 	}
 
-	public MathGeometryPolyline2D(Point2D.Double starting_point, MathVector2D... vectors) {
+	public Polyline2D(Point2D.Double starting_point, MathVector2D... vectors) {
 		if (starting_point == null)
 			throw new NullPointerException("The starting point should not be null.");
 		for (int i = 0; i < vectors.length; i++) {
