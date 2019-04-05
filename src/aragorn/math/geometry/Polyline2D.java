@@ -12,34 +12,44 @@ public class Polyline2D implements GuiPaintable {
 
 	private ArrayList<Point2D.Double> points = new ArrayList<>();
 
+	public Polyline2D() {
+	}
+
+	public Polyline2D(Point2D.Double point) {
+		this();
+		if (point == null)
+			throw new NullPointerException("The input points should not be null.");
+		addPoint(point);
+	}
+
 	/**
 	 * Constructs and initializes a {@code Polyline} from the specified parameters.
 	 * 
-	 * @param points
-	 *     the points in order
 	 * @throws NullPointerException
 	 *     if any of the points is null
 	 */
-	public Polyline2D(Point2D.Double... points) {
+	public Polyline2D(Point2D.Double point_0, Point2D.Double point_1, Point2D.Double... points) {
+		this(point_0);
+		if (point_1 == null)
+			throw new NullPointerException("The input points should not be null.");
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] == null) {
 				throw new NullPointerException("The input points should not be null.");
 			}
 		}
+		addPoint(point_1);
 		for (int i = 0; i < points.length; i++) {
 			addPoint(points[i]);
 		}
 	}
 
 	public Polyline2D(Point2D.Double starting_point, MathVector2D... vectors) {
-		if (starting_point == null)
-			throw new NullPointerException("The starting point should not be null.");
+		this(starting_point);
 		for (int i = 0; i < vectors.length; i++) {
 			if (vectors[i] == null) {
 				throw new NullPointerException("The input vectors should not be null.");
 			}
 		}
-		addPoint(starting_point);
 		Point2D.Double p = (Point2D.Double) starting_point.clone();
 		for (int i = 0; i < vectors.length; i++) {
 			p = MathVector2D.add(p, vectors[i]);

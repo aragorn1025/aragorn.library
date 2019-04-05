@@ -26,9 +26,9 @@ public class Polygon2D implements GuiPaintable {
 	 */
 	public Polygon2D(Point2D.Double... points) {
 		if (points[0].equals(points[points.length - 1])) {
-			polyline = new Polyline2D(Arrays.copyOf(points, points.length - 1));
+			polyline = new Polyline2D(points[0], points[1], Arrays.copyOfRange(points, 2, points.length - 1));
 		} else {
-			polyline = new Polyline2D(points);
+			polyline = new Polyline2D(points[0], points[1], Arrays.copyOfRange(points, 2, points.length));
 		}
 	}
 
