@@ -40,6 +40,6 @@ public class ConvexQuadrilateral2D extends Polygon2D {
 		for (int i = 0; i < v.length; i++) {
 			sum_area += (Math.abs(MathUtilities.determinant_2_2(v[i], v[(i + 1) % v.length])) / 2.0);
 		}
-		return Math.abs(getArea() - sum_area) <= 0.000000001;
+		return MathUtilities.isApproachZero(getArea() - sum_area);
 	}
 }

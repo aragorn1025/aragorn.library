@@ -3,7 +3,6 @@ package aragorn.math.geometry;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-
 import aragorn.util.MathVector2D;
 
 /**
@@ -62,9 +61,7 @@ public interface Paintable {
 	public void draw(Graphics g, Coordinate2D c);
 
 	/**
-	 * Returns an Rectangle that completely encloses the {@code Paintable) object.
-	 * 
-	 * @return an Rectangle that completely encloses the {@code Paintable) object
+	 * Returns an Rectangle that completely encloses the {@code Paintable) object. @return an Rectangle that completely encloses the {@code Paintable) object
 	 */
 	public Rectangle2D.Double getBounds();
 }
