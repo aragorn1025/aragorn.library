@@ -8,7 +8,7 @@ import aragorn.util.MathVector2D;
 
 public class LineSegment2D implements Paintable {
 
-	public static LineSegment2D getLineSegment(Polyline2D polyline, int index) {
+	public static LineSegment2D get(Polyline2D polyline, int index) {
 		if (polyline.getPointsNumber() < 0)
 			throw new InternalError("Unknown polyline.");
 		if (polyline.getPointsNumber() == 0 && index != 0)

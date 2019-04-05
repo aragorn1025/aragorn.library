@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-
 import aragorn.util.MathVector2D;
 
 public class Polyline2D implements Paintable {
@@ -85,6 +84,10 @@ public class Polyline2D implements Paintable {
 			y_max = Math.max(y_max, points.get(i).getY());
 		}
 		return new Rectangle2D.Double(x_min, y_min, x_max - x_min, y_max - y_min);
+	}
+
+	public LineSegment2D getLineSegment(int index) {
+		return LineSegment2D.get(this, index);
 	}
 
 	public Point2D.Double getPoint(int index) {
