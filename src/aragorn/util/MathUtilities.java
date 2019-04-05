@@ -5,30 +5,6 @@ import java.security.InvalidParameterException;
 
 public class MathUtilities {
 
-	public static boolean isIntersect(Point2D.Double point_0, Point2D.Double point_1, MathVector2D vector_0, MathVector2D vector_1) {
-		double determinant = MathUtilities.determinant_2_2(vector_0, vector_1);
-		MathVector2D vector = new MathVector2D(point_0, point_1);
-		if (determinant == 0.0) {
-			if (MathUtilities.determinant_2_2(vector, vector_0) == 0.0) {
-				double a = vector_0.getX() / vector.getX();
-				double b = vector_1.getX() / vector.getX();
-				if (a >= 1)
-					return true;
-				if (b <= -1)
-					return true;
-				if (a - b >= 1)
-					return true;
-			}
-		} else {
-			double s = determinant_2_2(vector, vector_0) / determinant;
-			double t = determinant_2_2(vector, vector_1) / determinant;
-			if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * Return the determinant value of a 2 times 2 matrix.
 	 * 
@@ -56,6 +32,30 @@ public class MathUtilities {
 
 	public static double determinant_2_2(MathVector2D vector_0, MathVector2D vector_1) {
 		return MathUtilities.determinant_2_2(vector_0.getX(), vector_0.getY(), vector_1.getX(), vector_1.getY());
+	}
+
+	public static boolean isIntersect(Point2D.Double point_0, Point2D.Double point_1, MathVector2D vector_0, MathVector2D vector_1) {
+		double determinant = MathUtilities.determinant_2_2(vector_0, vector_1);
+		MathVector2D vector = new MathVector2D(point_0, point_1);
+		if (determinant == 0.0) {
+			if (MathUtilities.determinant_2_2(vector, vector_0) == 0.0) {
+				double a = vector_0.getX() / vector.getX();
+				double b = vector_1.getX() / vector.getX();
+				if (a >= 1)
+					return true;
+				if (b <= -1)
+					return true;
+				if (a - b >= 1)
+					return true;
+			}
+		} else {
+			double s = determinant_2_2(vector, vector_0) / determinant;
+			double t = determinant_2_2(vector, vector_1) / determinant;
+			if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

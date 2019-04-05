@@ -4,11 +4,10 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import aragorn.gui.GuiCoordinate2D;
-import aragorn.gui.GuiPaintable;
+
 import aragorn.util.MathVector2D;
 
-public class Polyline2D implements GuiPaintable {
+public class Polyline2D implements Paintable {
 
 	private ArrayList<Point2D.Double> points = new ArrayList<>();
 
@@ -20,6 +19,20 @@ public class Polyline2D implements GuiPaintable {
 		if (point == null)
 			throw new NullPointerException("The input points should not be null.");
 		addPoint(point);
+	}
+
+	public Polyline2D(Point2D.Double starting_point, MathVector2D... vectors) {
+		this(starting_point);
+		for (int i = 0; i < vectors.length; i++) {
+			if (vectors[i] == null) {
+				throw new NullPointerException("The input vectors should not be null.");
+			}
+		}
+		Point2D.Double p = (Point2D.Double) starting_point.clone();
+		for (int i = 0; i < vectors.length; i++) {
+			p = MathVector2D.add(p, vectors[i]);
+			addPoint(p);
+		}
 	}
 
 	/**
@@ -43,20 +56,6 @@ public class Polyline2D implements GuiPaintable {
 		}
 	}
 
-	public Polyline2D(Point2D.Double starting_point, MathVector2D... vectors) {
-		this(starting_point);
-		for (int i = 0; i < vectors.length; i++) {
-			if (vectors[i] == null) {
-				throw new NullPointerException("The input vectors should not be null.");
-			}
-		}
-		Point2D.Double p = (Point2D.Double) starting_point.clone();
-		for (int i = 0; i < vectors.length; i++) {
-			p = MathVector2D.add(p, vectors[i]);
-			addPoint(p);
-		}
-	}
-
 	public void addPoint(double x, double y) {
 		points.add(new Point2D.Double(x, y));
 	}
@@ -66,9 +65,9 @@ public class Polyline2D implements GuiPaintable {
 	}
 
 	@Override
-	public void draw(Graphics g, GuiCoordinate2D c) {
+	public void draw(Graphics g, Coordinate2D c) {
 		for (int i = 1; i < getPointsNumber(); i++) {
-			GuiPaintable.drawLine(g, c, getPoint(i - 1), getPoint(i));
+			Paintable.drawLine(g, c, getPoint(i - 1), getPoint(i));
 		}
 	}
 

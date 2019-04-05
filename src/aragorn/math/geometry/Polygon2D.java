@@ -4,11 +4,10 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
-import aragorn.gui.GuiCoordinate2D;
-import aragorn.gui.GuiPaintable;
+
 import aragorn.util.MathVector2D;
 
-public class Polygon2D implements GuiPaintable {
+public class Polygon2D implements Paintable {
 
 	private static Point2D.Double[] getPoints(Point2D.Double point, MathVector2D... vectors) {
 		Point2D.Double[] points = new Point2D.Double[1 + vectors.length];
@@ -45,9 +44,9 @@ public class Polygon2D implements GuiPaintable {
 	}
 
 	@Override
-	public void draw(Graphics g, GuiCoordinate2D c) {
+	public void draw(Graphics g, Coordinate2D c) {
 		polyline.draw(g, c);
-		GuiPaintable.drawLine(g, c, getPoint(0), getPoint(getPointNumber() - 1));
+		Paintable.drawLine(g, c, getPoint(0), getPoint(getPointNumber() - 1));
 	}
 
 	public Rectangle2D.Double getBounds() {
