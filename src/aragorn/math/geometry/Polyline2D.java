@@ -106,4 +106,14 @@ public class Polyline2D implements Cloneable, Paintable {
 	public int getPointNumber() {
 		return points.size();
 	}
+
+	@Override
+	public String toString() {
+		String val = getClass().getSimpleName() + " [";
+		for (int i = 0; i < getPointNumber(); i++) {
+			val += String.format("(%.3f, %.3f), ", getPoint(i).x, getPoint(i).y);
+		}
+		val = val.substring(0, val.length() - 2) + "]";
+		return val;
+	}
 }

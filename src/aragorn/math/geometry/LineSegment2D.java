@@ -88,4 +88,9 @@ public class LineSegment2D implements Cloneable, Paintable {
 	public Point2D.Double[] getPoints() {
 		return points;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s [(%.3f, %.3f), (%.3f, %.3f)]", getClass().getSimpleName(), points[0].x, points[0].y, points[1].x, points[1].y);
+	}
 }

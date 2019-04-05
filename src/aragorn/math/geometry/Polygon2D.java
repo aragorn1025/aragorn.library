@@ -79,4 +79,15 @@ public class Polygon2D implements Cloneable, Paintable {
 	public int getPointNumber() {
 		return polyline.getPointNumber();
 	}
+
+	@Override
+	public String toString() {
+		String val = getClass().getSimpleName() + " [";
+		for (int i = 0; i < getPointNumber(); i++) {
+			val += String.format("(%.3f, %.3f), ", getPoint(i).x, getPoint(i).y);
+		}
+		val += String.format("(%.3f, %.3f)", getPoint(0).x, getPoint(0).y);
+		val += "]";
+		return val;
+	}
 }

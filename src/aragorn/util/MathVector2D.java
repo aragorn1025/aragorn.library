@@ -152,6 +152,6 @@ public class MathVector2D extends MathVector {
 
 	@Override
 	public String toString() {
-		return String.format("MathVector2D [x=%f, y=%f]", getX(), getY());
+		return String.format("%s [x=%f, y=%f]", getClass().getSimpleName(), getX(), getY());
 	}
 }

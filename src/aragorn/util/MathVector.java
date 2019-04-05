@@ -108,6 +108,6 @@ public class MathVector implements Cloneable {
 
 	@Override
 	public String toString() {
-		return String.format("MathVector %s", Arrays.toString(n));
+		return String.format("%s %s", getClass().getSimpleName(), Arrays.toString(n));
 	}
 }
