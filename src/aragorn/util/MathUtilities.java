@@ -2,6 +2,7 @@ package aragorn.util;
 
 import java.awt.geom.Point2D;
 import java.security.InvalidParameterException;
+import aragorn.math.geometry.LineSegment2D;
 
 public class MathUtilities {
 
@@ -32,6 +33,14 @@ public class MathUtilities {
 
 	public static double determinant_2_2(MathVector2D vector_0, MathVector2D vector_1) {
 		return MathUtilities.determinant_2_2(vector_0.getX(), vector_0.getY(), vector_1.getX(), vector_1.getY());
+	}
+
+	public static boolean isApproachZero(double value) {
+		return Math.abs(value) <= 0.000000001;
+	}
+
+	public static boolean isIntersect(LineSegment2D segment_0, LineSegment2D segment_1) {
+		return MathUtilities.isIntersect(segment_0.getPoints()[0], segment_1.getPoints()[0], segment_0.getVector(), segment_1.getVector());
 	}
 
 	public static boolean isIntersect(Point2D.Double point_0, Point2D.Double point_1, MathVector2D vector_0, MathVector2D vector_1) {

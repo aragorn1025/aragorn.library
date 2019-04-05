@@ -89,6 +89,10 @@ public class LineSegment2D implements Cloneable, Paintable {
 		return points;
 	}
 
+	public MathVector2D getVector() {
+		return new MathVector2D(points[0], points[1]);
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s [(%.3f, %.3f), (%.3f, %.3f)]", getClass().getSimpleName(), points[0].x, points[0].y, points[1].x, points[1].y);

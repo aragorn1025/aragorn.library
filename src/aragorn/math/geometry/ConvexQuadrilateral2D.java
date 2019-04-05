@@ -24,7 +24,7 @@ public class ConvexQuadrilateral2D extends Polygon2D {
 		MathVector2D v_0_1 = new MathVector2D(getPoint(0), getPoint(1));
 		MathVector2D v_0_2 = new MathVector2D(getPoint(0), getPoint(2));
 		MathVector2D v_0_3 = new MathVector2D(getPoint(0), getPoint(3));
-		return (MathUtilities.determinant_2_2(v_0_1, v_0_2) + MathUtilities.determinant_2_2(v_0_2, v_0_3)) / 2.0;
+		return (Math.abs(MathUtilities.determinant_2_2(v_0_1, v_0_2)) + Math.abs(MathUtilities.determinant_2_2(v_0_2, v_0_3))) / 2.0;
 	}
 
 	public boolean isConvex() {
@@ -32,12 +32,14 @@ public class ConvexQuadrilateral2D extends Polygon2D {
 	}
 
 	public boolean isSurround(Point2D.Double point) {
-		MathVector2D v_0 = new MathVector2D(point, getPoint(0));
-		MathVector2D v_1 = new MathVector2D(point, getPoint(1));
-		MathVector2D v_2 = new MathVector2D(point, getPoint(2));
-		MathVector2D v_3 = new MathVector2D(point, getPoint(3));
-		double sum_area = (MathUtilities.determinant_2_2(v_0, v_1) + MathUtilities.determinant_2_2(v_1, v_2) + MathUtilities.determinant_2_2(v_2, v_3)
-				+ MathUtilities.determinant_2_2(v_3, v_0)) / 2.0;
-		return getArea() == sum_area;
+		MathVector2D[] v = new MathVector2D[4];
+		for (int i = 0; i < v.length; i++) {
+			v[i] = new MathVector2D(point, getPoint(i));
+		}
+		double sum_area = 0.0;
+		for (int i = 0; i < v.length; i++) {
+			sum_area += (Math.abs(MathUtilities.determinant_2_2(v[i], v[(i + 1) % v.length])) / 2.0);
+		}
+		return Math.abs(getArea() - sum_area) <= 0.000000001;
 	}
 }
