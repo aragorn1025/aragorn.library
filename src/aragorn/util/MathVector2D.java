@@ -95,13 +95,6 @@ public class MathVector2D extends MathVector {
 		this(end_point.getX() - starting_point.getX(), end_point.getY() - starting_point.getY());
 	}
 
-	/**
-	 * Add other vectors to this vector.
-	 */
-	public MathVector2D add(MathVector2D vector_0, MathVector2D... vectors) {
-		return MathVector2D.add(this, vector_0, vectors);
-	}
-
 	@Override
 	public MathVector2D getNegative() {
 		return (MathVector2D) super.getNegative();
