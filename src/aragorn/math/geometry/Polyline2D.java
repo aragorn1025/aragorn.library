@@ -66,7 +66,7 @@ public class Polyline2D implements Cloneable, Paintable {
 	@Override
 	public Object clone() {
 		Polyline2D val = new Polyline2D();
-		for (int i = 0; i < this.getPointsNumber(); i++) {
+		for (int i = 0; i < this.getPointNumber(); i++) {
 			val.addPoint((Point2D.Double) this.getPoint(i).clone());
 		}
 		return val;
@@ -74,19 +74,19 @@ public class Polyline2D implements Cloneable, Paintable {
 
 	@Override
 	public void draw(Graphics g, Coordinate2D c) {
-		for (int i = 1; i < getPointsNumber(); i++) {
+		for (int i = 1; i < getPointNumber(); i++) {
 			Paintable.drawLine(g, c, getPoint(i - 1), getPoint(i));
 		}
 	}
 
 	public Rectangle2D.Double getBounds() {
-		if (getPointsNumber() == 0)
+		if (getPointNumber() == 0)
 			return new Rectangle2D.Double();
 		double x_min = points.get(0).getX();
 		double x_max = points.get(0).getX();
 		double y_min = points.get(0).getY();
 		double y_max = points.get(0).getY();
-		for (int i = 1; i < getPointsNumber(); i++) {
+		for (int i = 1; i < getPointNumber(); i++) {
 			x_min = Math.min(x_min, points.get(i).getX());
 			x_max = Math.max(x_max, points.get(i).getX());
 			y_min = Math.min(y_min, points.get(i).getY());
@@ -103,7 +103,7 @@ public class Polyline2D implements Cloneable, Paintable {
 		return points.get(index);
 	}
 
-	public int getPointsNumber() {
+	public int getPointNumber() {
 		return points.size();
 	}
 }

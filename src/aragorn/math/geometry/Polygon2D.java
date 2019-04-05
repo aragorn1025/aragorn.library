@@ -68,11 +68,15 @@ public class Polygon2D implements Cloneable, Paintable {
 		return polyline.getBounds();
 	}
 
+	public LineSegment2D getLineSegment(int index) {
+		return LineSegment2D.get(this, index);
+	}
+
 	public Point2D.Double getPoint(int index) {
 		return polyline.getPoint(index);
 	}
 
 	public int getPointNumber() {
-		return polyline.getPointsNumber();
+		return polyline.getPointNumber();
 	}
 }

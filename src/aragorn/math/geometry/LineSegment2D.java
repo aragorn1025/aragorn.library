@@ -8,12 +8,25 @@ import aragorn.util.MathVector2D;
 
 public class LineSegment2D implements Cloneable, Paintable {
 
-	public static LineSegment2D get(Polyline2D polyline, int index) {
-		if (polyline.getPointsNumber() < 0)
-			throw new InternalError("Unknown polyline.");
-		if (polyline.getPointsNumber() == 0 && index != 0)
+	public static LineSegment2D get(Polygon2D polygon, int index) {
+		if (polygon.getPointNumber() < 0)
+			throw new InternalError("Unknown polygon.");
+		if (polygon.getPointNumber() == 0 && index != 0) {
+			if (index == 0)
+				return new LineSegment2D();
 			throw new InvalidParameterException("Index out of bounds.");
-		if (polyline.getPointsNumber() == 0 && index == 0)
+		}
+		if (index == polygon.getPointNumber() - 1)
+			return new LineSegment2D(polygon.getPoint(index), polygon.getPoint(0));
+		return new LineSegment2D(polygon.getPoint(index), polygon.getPoint(index + 1));
+	}
+
+	public static LineSegment2D get(Polyline2D polyline, int index) {
+		if (polyline.getPointNumber() < 0)
+			throw new InternalError("Unknown polyline.");
+		if (polyline.getPointNumber() == 0 && index != 0)
+			throw new InvalidParameterException("Index out of bounds.");
+		if (polyline.getPointNumber() == 0 && index == 0)
 			return new LineSegment2D();
 		return new LineSegment2D(polyline.getPoint(index), polyline.getPoint(index + 1));
 	}
