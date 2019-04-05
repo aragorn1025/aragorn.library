@@ -4,10 +4,9 @@ import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
-
 import aragorn.util.MathVector2D;
 
-public class Polygon2D implements Paintable {
+public class Polygon2D implements Cloneable, Paintable {
 
 	private static Point2D.Double[] getPoints(Point2D.Double point, MathVector2D... vectors) {
 		Point2D.Double[] points = new Point2D.Double[1 + vectors.length];
@@ -41,6 +40,22 @@ public class Polygon2D implements Paintable {
 	 */
 	public Polygon2D(Point2D.Double point, MathVector2D... vectors) {
 		this(Polygon2D.getPoints(point, vectors));
+	}
+
+	public Polygon2D(Polyline2D polyline) {
+		this.polyline = (Polyline2D) polyline.clone();
+	}
+
+	@Override
+	public Object clone() {
+		Polygon2D val = null;
+		try {
+			val = (Polygon2D) super.clone();
+			val.polyline = (Polyline2D) polyline.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
+		}
+		return val;
 	}
 
 	@Override

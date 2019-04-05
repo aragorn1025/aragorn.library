@@ -29,9 +29,14 @@ public class MathVector implements Cloneable {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		MathVector val = (MathVector) super.clone();
-		val.n = this.n.clone();
+	public Object clone() {
+		MathVector val;
+		try {
+			val = (MathVector) super.clone();
+			val.n = this.n.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
+		}
 		return val;
 	}
 
@@ -94,12 +99,7 @@ public class MathVector implements Cloneable {
 	 * @return the scalar multiplied vector
 	 */
 	public MathVector getScalarMultiply(double multiplier) {
-		MathVector val = null;
-		try {
-			val = (MathVector) this.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		MathVector val = (MathVector) this.clone();
 		for (int i = 0; i < val.n.length; i++) {
 			val.n[i] *= multiplier;
 		}

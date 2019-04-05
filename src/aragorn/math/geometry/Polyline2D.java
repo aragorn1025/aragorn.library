@@ -6,7 +6,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import aragorn.util.MathVector2D;
 
-public class Polyline2D implements Paintable {
+public class Polyline2D implements Cloneable, Paintable {
 
 	private ArrayList<Point2D.Double> points = new ArrayList<>();
 
@@ -61,6 +61,15 @@ public class Polyline2D implements Paintable {
 
 	public void addPoint(Point2D.Double point) {
 		this.addPoint(point.getX(), point.getY());
+	}
+
+	@Override
+	public Object clone() {
+		Polyline2D val = new Polyline2D();
+		for (int i = 0; i < this.getPointsNumber(); i++) {
+			val.addPoint((Point2D.Double) this.getPoint(i).clone());
+		}
+		return val;
 	}
 
 	@Override

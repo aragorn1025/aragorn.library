@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import java.security.InvalidParameterException;
 import aragorn.util.MathVector2D;
 
-public class LineSegment2D implements Paintable {
+public class LineSegment2D implements Cloneable, Paintable {
 
 	public static LineSegment2D get(Polyline2D polyline, int index) {
 		if (polyline.getPointsNumber() < 0)
@@ -31,6 +31,20 @@ public class LineSegment2D implements Paintable {
 	public LineSegment2D(Point2D.Double starting_point, Point2D.Double ending_point) {
 		this.points[0] = (Point2D.Double) starting_point.clone();
 		this.points[1] = (Point2D.Double) ending_point.clone();
+	}
+
+	@Override
+	public Object clone() {
+		LineSegment2D val = null;
+		try {
+			val = (LineSegment2D) super.clone();
+			val.points = val.points.clone();
+			val.points[0] = (Point2D.Double) points[0].clone();
+			val.points[1] = (Point2D.Double) points[1].clone();
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError(e.toString());
+		}
+		return val;
 	}
 
 	@Override
