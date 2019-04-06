@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -29,13 +31,23 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent arg) {
-			if (showDialog(parent) == JFileChooser.APPROVE_OPTION) {
-				parent.echo("Open file: " + getSelectedFile().getAbsolutePath(), GuiFrame.INFORMATION_MESSAGE);
-			} else {
+		protected void action() {
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (showDialog(parent) != JFileChooser.APPROVE_OPTION) {
 				setSelectedFile(null);
 				parent.echo("File input command cancelled by user.", GuiFrame.WARNING_MESSAGE);
+				return;
 			}
+			if (!getSelectedFile().exists()) {
+				setSelectedFile(null);
+				parent.echo("File is not found.", GuiFrame.ERROR_MESSAGE);
+				return;
+			}
+			action();
+			parent.echo("Open file: " + getSelectedFile().getAbsolutePath(), GuiFrame.INFORMATION_MESSAGE);
 		}
 
 		@Override
@@ -93,17 +105,40 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			if (showDialog(null) == JFileChooser.APPROVE_OPTION) {
-				if (this.getChoosableFileFilters().length > 0) {
-					setSelectedFile(new File(GuiFileChooser.Save.toNormalizedFilePathString(this.getSelectedFile(),
-							((FileNameExtensionFilter) (this.getChoosableFileFilters()[0])).getExtensions()[0])));
-				}
-				parent.echo("Save file: " + getSelectedFile().getPath(), GuiFrame.INFORMATION_MESSAGE);
-			} else {
+		protected void action() {
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (showDialog(null) != JFileChooser.APPROVE_OPTION) {
 				setSelectedFile(null);
 				parent.echo("File output command cancelled by user.", GuiFrame.WARNING_MESSAGE);
+				return;
 			}
+			if (this.getChoosableFileFilters().length > 0) {
+				setSelectedFile(new File(GuiFileChooser.Save.toNormalizedFilePathString(this.getSelectedFile(),
+						((FileNameExtensionFilter) (this.getChoosableFileFilters()[0])).getExtensions()[0])));
+			}
+			if (getSelectedFile().exists()) {
+				if (!getSelectedFile().canWrite()) {
+					setSelectedFile(null);
+					parent.echo("The file is read only.", GuiFrame.ERROR_MESSAGE);
+					return;
+				}
+				if (JOptionPane.showConfirmDialog(parent, "The file will be overwrite.", "Warning", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+					setSelectedFile(null);
+					parent.echo("File output command cancelled by user.", GuiFrame.WARNING_MESSAGE);
+					return;
+				}
+				getSelectedFile().delete();
+			}
+			try {
+				getSelectedFile().createNewFile();
+			} catch (IOException exception) {
+				throw new InternalError(exception.toString());
+			}
+			action();
+			parent.echo("Save file: " + getSelectedFile().getPath(), GuiFrame.INFORMATION_MESSAGE);
 		}
 
 		@Override
@@ -119,9 +154,9 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
-	public static final String USER_HOME = System.getProperty("user.home");
+	public static final File USER_HOME = new File(System.getProperty("user.home"));
 
-	public static final String USER_DESKTOP = USER_HOME + FILE_SEPARATOR + "Desktop";
+	public static final File USER_DESKTOP = new File(USER_HOME + FILE_SEPARATOR + "Desktop");
 
 	protected GuiFrame parent;
 
@@ -135,11 +170,14 @@ public abstract class GuiFileChooser extends JFileChooser implements ActionListe
 		}
 	}
 
+	protected abstract void action();
+
 	/** Return the action text for the button */
 	public abstract String getActionString();
 
+	@Override
 	public void setCurrentDirectory(File directory) {
-		super.setCurrentDirectory(directory == null ? new File(USER_DESKTOP) : directory);
+		super.setCurrentDirectory(directory == null ? USER_DESKTOP : directory);
 	}
 
 	/**
