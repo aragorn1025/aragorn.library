@@ -1,11 +1,11 @@
 package aragorn.gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.security.InvalidParameterException;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -56,7 +56,7 @@ public class GuiPanel extends JPanel {
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int, Insets)
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int)
 	 */
-	public void addComponent(JComponent component, int grid_x, int grid_y) {
+	public void addComponent(Component component, int grid_x, int grid_y) {
 		int anchor = GridBagConstraints.CENTER;
 		int fill = GridBagConstraints.NONE;
 		addComponent(component, grid_x, grid_y, 1, 1, 0, 0, anchor, fill);
@@ -85,7 +85,7 @@ public class GuiPanel extends JPanel {
 	 *     determines whether and how to resize the component,and its default value is {@code NONE}
 	 * @see #addComponent(JComponent, int, int, int, int, double, double, int, int, Insets)
 	 */
-	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill) {
+	public void addComponent(Component component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill) {
 		Insets insets = new Insets((grid_y == 0 ? this.margin : 0), (grid_x == 0 ? this.margin : 0), this.margin, this.margin);
 		addComponent(component, grid_x, grid_y, grid_width, grid_height, weight_x, weight_y, anchor, fill, insets);
 	}
@@ -115,7 +115,7 @@ public class GuiPanel extends JPanel {
 	 *     the custom insets, for setting horizontal and vertical margin length
 	 * @see <a target="_blank" href= "https://docs.oracle.com/javase/8/docs/api/java/awt/GridBagConstraints.html">GridBagConstraints</a>
 	 */
-	public void addComponent(JComponent component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill,
+	public void addComponent(Component component, int grid_x, int grid_y, int grid_width, int grid_height, double weight_x, double weight_y, int anchor, int fill,
 			Insets insets) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = grid_x;
