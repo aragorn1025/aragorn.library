@@ -85,8 +85,12 @@ public class LineSegment2D implements Cloneable, Paintable {
 		return MathVector2D.add(v1, v0.getScalarMultiply(-val)).getLength();
 	}
 
-	public Point2D.Double[] getPoints() {
-		return points;
+	public Point2D.Double getPoint(int index) {
+		return points[index];
+	}
+
+	public int getPointsNumber() {
+		return 2;
 	}
 
 	public MathVector2D getVector() {

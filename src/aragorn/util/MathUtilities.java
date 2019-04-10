@@ -40,7 +40,7 @@ public class MathUtilities {
 	}
 
 	public static boolean isIntersect(LineSegment2D segment_0, LineSegment2D segment_1) {
-		return MathUtilities.isIntersect(segment_0.getPoints()[0], segment_1.getPoints()[0], segment_0.getVector(), segment_1.getVector());
+		return MathUtilities.isIntersect(segment_0.getPoint(0), segment_1.getPoint(0), segment_0.getVector(), segment_1.getVector());
 	}
 
 	public static boolean isIntersect(Point2D.Double point_0, Point2D.Double point_1, MathVector2D vector_0, MathVector2D vector_1) {
