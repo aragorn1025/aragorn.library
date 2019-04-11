@@ -42,12 +42,26 @@ public interface Paintable {
 	 */
 	public static void drawLine(Graphics g, Coordinate2D c, Point2D.Double point_0, Point2D.Double point_1) {
 		if (c == null) {
-			g.drawLine((int) point_0.getX(), (int) point_0.getY(), (int) point_1.getX(), (int) point_1.getY());
-		} else {
-			Point2D.Double converted_point_0 = c.convertToPanel(point_0);
-			Point2D.Double converted_point_1 = c.convertToPanel(point_1);
-			g.drawLine((int) converted_point_0.getX(), (int) converted_point_0.getY(), (int) converted_point_1.getX(), (int) converted_point_1.getY());
+			drawLine(g, new Coordinate2D(), point_0, point_1);
+			return;
 		}
+		Point2D.Double converted_point_0 = c.convertToPanel(point_0);
+		Point2D.Double converted_point_1 = c.convertToPanel(point_1);
+		g.drawLine((int) converted_point_0.getX(), (int) converted_point_0.getY(), (int) converted_point_1.getX(), (int) converted_point_1.getY());
+	}
+
+	public static void drawOval(Graphics g, Coordinate2D c, Point2D.Double center, double width, double height) {
+		if (c == null) {
+			drawOval(g, new Coordinate2D(), center, width, height);
+			return;
+		}
+		Point2D.Double converted_point_center = c.convertToPanel(center);
+		MathVector2D convert_size = c.convertToPanel(new MathVector2D(width, height));
+		int x_min = (int) Math.round(converted_point_center.getX() - convert_size.getX() / 2.0);
+		int x_max = (int) Math.round(converted_point_center.getX() + convert_size.getX() / 2.0);
+		int y_min = (int) Math.round(converted_point_center.getY() - convert_size.getY() / 2.0);
+		int y_max = (int) Math.round(converted_point_center.getY() + convert_size.getY() / 2.0);
+		g.drawOval(x_min, y_min, x_max - x_min, y_max - y_min);
 	}
 
 	/**
