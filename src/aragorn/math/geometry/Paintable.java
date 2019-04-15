@@ -51,8 +51,24 @@ public interface Paintable {
 	}
 
 	public static void drawOval(Graphics g, Coordinate2D c, Point2D.Double center, double width, double height) {
+		paintOval(g, c, false, center, width, height);
+	}
+
+	public static void drawRectangle(Graphics g, Coordinate2D c, Point2D.Double reference_point, double width, double height) {
+		paintRectangle(g, c, false, reference_point, width, height);
+	}
+
+	public static void fillOval(Graphics g, Coordinate2D c, Point2D.Double center, double width, double height) {
+		paintOval(g, c, true, center, width, height);
+	}
+
+	public static void fillRectangle(Graphics g, Coordinate2D c, Point2D.Double reference_point, double width, double height) {
+		paintRectangle(g, c, true, reference_point, width, height);
+	}
+
+	public static void paintOval(Graphics g, Coordinate2D c, boolean to_fill, Point2D.Double center, double width, double height) {
 		if (c == null) {
-			drawOval(g, new Coordinate2D(), center, width, height);
+			paintOval(g, new Coordinate2D(), to_fill, center, width, height);
 			return;
 		}
 		Point2D.Double converted_point_center = c.convertToPanel(center);
@@ -61,7 +77,29 @@ public interface Paintable {
 		int x_max = (int) Math.round(converted_point_center.getX() + convert_size.getX() / 2.0);
 		int y_min = (int) Math.round(converted_point_center.getY() - convert_size.getY() / 2.0);
 		int y_max = (int) Math.round(converted_point_center.getY() + convert_size.getY() / 2.0);
-		g.drawOval(x_min, y_min, x_max - x_min, y_max - y_min);
+		if (to_fill) {
+			g.fillOval(x_min, y_min, x_max - x_min, y_max - y_min);
+		} else {
+			g.drawOval(x_min, y_min, x_max - x_min, y_max - y_min);
+		}
+	}
+
+	public static void paintRectangle(Graphics g, Coordinate2D c, boolean to_fill, Point2D.Double reference_point, double width, double height) {
+		if (c == null) {
+			paintRectangle(g, new Coordinate2D(), to_fill, reference_point, width, height);
+			return;
+		}
+		Point2D.Double converted_point_reference_point = c.convertToPanel(reference_point);
+		MathVector2D convert_size = c.convertToPanel(new MathVector2D(width, height));
+		int x_min = (int) Math.round(converted_point_reference_point.getX());
+		int x_max = (int) Math.round(converted_point_reference_point.getX() + convert_size.getX());
+		int y_min = (int) Math.round(converted_point_reference_point.getY());
+		int y_max = (int) Math.round(converted_point_reference_point.getY() + convert_size.getY());
+		if (to_fill) {
+			g.fillRect(x_min, y_min, x_max - x_min, y_max - y_min);
+		} else {
+			g.drawRect(x_min, y_min, x_max - x_min, y_max - y_min);
+		}
 	}
 
 	/**
