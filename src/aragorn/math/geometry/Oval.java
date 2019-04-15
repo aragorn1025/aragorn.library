@@ -43,4 +43,10 @@ public class Oval implements Paintable {
 	public double getWidth() {
 		return width;
 	}
+
+	public boolean isSurround(Point2D.Double point) {
+		double dx = point.getX() - center.getX();
+		double dy = point.getY() - center.getY();
+		return ((4.0 * dx * dx) / (width * width) + (4.0 * dy * dy) / (height * height)) <= 1;
+	}
 }
