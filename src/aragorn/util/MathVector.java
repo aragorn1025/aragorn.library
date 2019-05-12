@@ -9,6 +9,45 @@ import java.util.Arrays;
  */
 public class MathVector implements Cloneable {
 
+	/**
+	 * Add vectors.
+	 * 
+	 * @param vector_0
+	 *     the first vector to add
+	 * @param vector_1
+	 *     the second vector to add
+	 * @param vectors
+	 *     (optional) the other vectors to add
+	 */
+	public static MathVector add(MathVector vector_0, MathVector vector_1, MathVector... vectors) {
+		if (vector_0 == null)
+			throw new NullPointerException("The input vectors for add() must not be null.");
+		if (vector_1 == null)
+			throw new NullPointerException("The input vectors for add() must not be null.");
+		for (MathVector vector : vectors) {
+			if (vector == null) {
+				throw new NullPointerException("The input vectors for add() must not be null.");
+			}
+		}
+		if (vector_0.getDimension() != vector_1.getDimension())
+			throw new IllegalArgumentException("The dimension of the vectors should be the same.");
+		for (MathVector vector : vectors) {
+			if (vector_0.getDimension() != vector.getDimension()) {
+				throw new IllegalArgumentException("The dimension of the vectors should be the same.");
+			}
+		}
+		MathVector val = (MathVector) vector_0.clone();
+		for (int i = 0; i < vector_1.getDimension(); i++) {
+			val.n[i] += vector_1.getComponent(i);
+		}
+		for (MathVector vector : vectors) {
+			for (int i = 0; i < vector.getDimension(); i++) {
+				val.n[i] += vector.getComponent(i);
+			}
+		}
+		return val;
+	}
+
 	/** The value of the components. */
 	protected double[] n;
 
