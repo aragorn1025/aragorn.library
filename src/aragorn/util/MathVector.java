@@ -34,14 +34,30 @@ public class MathVector implements Cloneable {
 				throw new IllegalArgumentException("The dimension of the vectors for add() should be the same.");
 			}
 		}
-		double[] val = new double[vector_0.getDimension()];
-		for (int i = 0; i < val.length; i++) {
-			val[i] = vector_0.getComponent(i) + vector_1.getComponent(i);
+		MathVector val = new MathVector(vector_0.getDimension());
+		for (int i = 0; i < val.getDimension(); i++) {
+			val.n[i] = vector_0.getComponent(i) + vector_1.getComponent(i);
 			for (int j = 0; j < vectors.length; j++) {
-				val[i] += vectors[j].getComponent(i);
+				val.n[i] += vectors[j].getComponent(i);
 			}
 		}
-		return new MathVector(val);
+		return val;
+	}
+
+	public static MathVector concatenate(MathVector vector_0, MathVector vector_1) {
+		if (vector_0 == null)
+			throw new NullPointerException("The input vectors for concate must not be null.");
+		if (vector_1 == null)
+			throw new NullPointerException("The input vectors for concate must not be null.");
+		MathVector val = new MathVector();
+		val.n = new double[vector_0.getDimension() + vector_1.getDimension()];
+		for (int i = 0; i < vector_0.getDimension(); i++) {
+			val.n[i] = vector_0.getComponent(i);
+		}
+		for (int i = 0; i < vector_1.getDimension(); i++) {
+			val.n[vector_0.getDimension() + i] = vector_1.getComponent(i);
+		}
+		return val;
 	}
 
 	public static double getInnerProduct(MathVector vector_0, MathVector vector_1) {
@@ -61,17 +77,7 @@ public class MathVector implements Cloneable {
 		this(1);
 	}
 
-	/** Create a vector in mathematics */
-	public MathVector(double[] n) {
-		if (n == null)
-			throw new NullPointerException("The input for the math vector should not be null.");
-		if (n.length == 0)
-			throw new IllegalArgumentException("The input for the math vector should not be nothing");
-		for (int i = 0; i < n.length; i++) {
-			this.n[i] = n[i];
-		}
-	}
-
+	/** Create a vector in mathematics by dimension. */
 	public MathVector(int dimension) {
 		if (dimension <= 0)
 			throw new IllegalArgumentException("The dimension should be positive integer.");
@@ -151,36 +157,6 @@ public class MathVector implements Cloneable {
 			val.n[i] *= multiplier;
 		}
 		return val;
-	}
-
-	/**
-	 * Set the vector by the array.
-	 * 
-	 * @param n
-	 *     the array to be set
-	 */
-	public void set(double[] n) {
-		if (n == null)
-			throw new NullPointerException("The array to be set should not be null.");
-		if (n.length <= 0)
-			throw new IllegalArgumentException("The array to be set should not be nothing.");
-		if (n.equals(this.n))
-			return;
-		this.n = n.clone();
-	}
-
-	/**
-	 * Set the vector by the other vector.
-	 * 
-	 * @param vector
-	 *     the new vector to be set
-	 */
-	public void set(MathVector vector) {
-		if (vector == null)
-			throw new NullPointerException("The vector to be set should not be null.");
-		if (vector.equals(this))
-			return;
-		this.n = vector.n.clone();
 	}
 
 	public void setComponent(int index, double value) {

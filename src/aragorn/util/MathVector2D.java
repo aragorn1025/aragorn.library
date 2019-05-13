@@ -69,7 +69,9 @@ public class MathVector2D extends MathVector {
 	 *     the y value of the vector
 	 */
 	public MathVector2D(double x, double y) {
-		super(new double[] { x, y });
+		super(2);
+		setComponent(0, x);
+		setComponent(1, y);
 	}
 
 	public MathVector2D(MathVector2D math_vector_2d) {
@@ -119,20 +121,6 @@ public class MathVector2D extends MathVector {
 	public void set(double x, double y) {
 		setComponent(0, x);
 		setComponent(1, y);
-	}
-
-	@Override
-	public void set(double[] n) {
-		if (n.length != 2)
-			throw new IllegalArgumentException("The dimension of the array should be 2.");
-		super.set(n);
-	}
-
-	@Override
-	public void set(MathVector vector) {
-		if (vector.getDimension() != 2)
-			throw new IllegalArgumentException("The dimension of the vector should be 2.");
-		super.set(vector);
 	}
 
 	/**
