@@ -20,22 +20,7 @@ public class MathVector2D extends MathVector {
 	 *     (optional) the other vectors to add
 	 */
 	public static MathVector2D add(MathVector2D vector_0, MathVector2D vector_1, MathVector2D... vectors) {
-		if (vector_0 == null)
-			throw new NullPointerException("The input vectors for add() must not be null.");
-		if (vector_1 == null)
-			throw new NullPointerException("The input vectors for add() must not be null.");
-		for (MathVector2D vector : vectors) {
-			if (vector == null) {
-				throw new NullPointerException("The input vectors for add() must not be null.");
-			}
-		}
-		double x = vector_0.getX() + vector_1.getX();
-		double y = vector_0.getY() + vector_1.getY();
-		for (MathVector2D vector : vectors) {
-			x += vector.getX();
-			y += vector.getY();
-		}
-		return new MathVector2D(x, y);
+		return (MathVector2D) MathVector.add(vector_0, vector_1, vectors);
 	}
 
 	/**
@@ -84,7 +69,7 @@ public class MathVector2D extends MathVector {
 	 *     the y value of the vector
 	 */
 	public MathVector2D(double x, double y) {
-		super(x, y);
+		super(new double[] { x, y });
 	}
 
 	public MathVector2D(MathVector2D math_vector_2d) {
@@ -132,8 +117,22 @@ public class MathVector2D extends MathVector {
 	 *     the new y value of the vector
 	 */
 	public void set(double x, double y) {
-		this.n[0] = x;
-		this.n[1] = y;
+		setComponent(0, x);
+		setComponent(1, y);
+	}
+
+	@Override
+	public void set(double[] n) {
+		if (n.length != 2)
+			throw new IllegalArgumentException("The dimension of the array should be 2.");
+		super.set(n);
+	}
+
+	@Override
+	public void set(MathVector vector) {
+		if (vector.getDimension() != 2)
+			throw new IllegalArgumentException("The dimension of the vector should be 2.");
+		super.set(vector);
 	}
 
 	/**
@@ -145,9 +144,9 @@ public class MathVector2D extends MathVector {
 	public void set(MathVector2D vector) {
 		if (vector == null)
 			throw new NullPointerException();
-		if (!vector.equals(this)) {
-			this.set(vector.getX(), vector.getY());
-		}
+		if (vector.equals(this))
+			return;
+		this.set(vector.getX(), vector.getY());
 	}
 
 	@Override

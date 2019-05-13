@@ -24,26 +24,32 @@ public class MathVector implements Cloneable {
 			throw new NullPointerException("The input vectors for add() must not be null.");
 		if (vector_1 == null)
 			throw new NullPointerException("The input vectors for add() must not be null.");
+		if (vector_0.getDimension() != vector_1.getDimension())
+			throw new IllegalArgumentException("The dimension of the vectors for add() should be the same.");
 		for (MathVector vector : vectors) {
 			if (vector == null) {
 				throw new NullPointerException("The input vectors for add() must not be null.");
 			}
-		}
-		if (vector_0.getDimension() != vector_1.getDimension())
-			throw new IllegalArgumentException("The dimension of the vectors should be the same.");
-		for (MathVector vector : vectors) {
 			if (vector_0.getDimension() != vector.getDimension()) {
-				throw new IllegalArgumentException("The dimension of the vectors should be the same.");
+				throw new IllegalArgumentException("The dimension of the vectors for add() should be the same.");
 			}
 		}
-		MathVector val = (MathVector) vector_0.clone();
-		for (int i = 0; i < vector_1.getDimension(); i++) {
-			val.n[i] += vector_1.getComponent(i);
-		}
-		for (MathVector vector : vectors) {
-			for (int i = 0; i < vector.getDimension(); i++) {
-				val.n[i] += vector.getComponent(i);
+		double[] val = new double[vector_0.getDimension()];
+		for (int i = 0; i < val.length; i++) {
+			val[i] = vector_0.getComponent(i) + vector_1.getComponent(i);
+			for (int j = 0; j < vectors.length; j++) {
+				val[i] += vectors[j].getComponent(i);
 			}
+		}
+		return new MathVector(val);
+	}
+
+	public static double getInnerProduct(MathVector vector_0, MathVector vector_1) {
+		if (vector_0.getDimension() != vector_1.getDimension())
+			throw new IllegalArgumentException("The dimension of the vectors for getInnerProduct() should be the same.");
+		double val = 0;
+		for (int i = 0; i < vector_0.getDimension(); i++) {
+			val += (vector_0.getComponent(i) * vector_1.getComponent(i));
 		}
 		return val;
 	}
@@ -51,20 +57,26 @@ public class MathVector implements Cloneable {
 	/** The value of the components. */
 	protected double[] n;
 
-	/**
-	 * Create a vector in mathematics
-	 * 
-	 * @param x
-	 *     the x value of the vector
-	 * @param y
-	 *     the y value of the vector
-	 */
-	public MathVector(double n0, double... nx) {
-		n = new double[1 + nx.length];
-		n[0] = n0;
-		for (int i = 0; i < nx.length; i++) {
-			n[i + 1] = nx[i];
+	public MathVector() {
+		this(1);
+	}
+
+	/** Create a vector in mathematics */
+	public MathVector(double[] n) {
+		if (n == null)
+			throw new NullPointerException("The input for the math vector should not be null.");
+		if (n.length == 0)
+			throw new IllegalArgumentException("The input for the math vector should not be nothing");
+		for (int i = 0; i < n.length; i++) {
+			this.n[i] = n[i];
 		}
+	}
+
+	public MathVector(int dimension) {
+		if (dimension <= 0)
+			throw new IllegalArgumentException("The dimension should be positive integer.");
+		this.n = new double[dimension];
+		Arrays.fill(n, 0.0);
 	}
 
 	@Override
@@ -116,11 +128,7 @@ public class MathVector implements Cloneable {
 	 * @return the length of the vector
 	 */
 	public double getLength() {
-		double val = 0;
-		for (int i = 0; i < n.length; i++) {
-			val += (n[i] * n[i]);
-		}
-		return Math.pow(val, 0.5);
+		return Math.pow(MathVector.getInnerProduct(this, this), 0.5);
 	}
 
 	/**
@@ -143,6 +151,40 @@ public class MathVector implements Cloneable {
 			val.n[i] *= multiplier;
 		}
 		return val;
+	}
+
+	/**
+	 * Set the vector by the array.
+	 * 
+	 * @param n
+	 *     the array to be set
+	 */
+	public void set(double[] n) {
+		if (n == null)
+			throw new NullPointerException("The array to be set should not be null.");
+		if (n.length <= 0)
+			throw new IllegalArgumentException("The array to be set should not be nothing.");
+		if (n.equals(this.n))
+			return;
+		this.n = n.clone();
+	}
+
+	/**
+	 * Set the vector by the other vector.
+	 * 
+	 * @param vector
+	 *     the new vector to be set
+	 */
+	public void set(MathVector vector) {
+		if (vector == null)
+			throw new NullPointerException("The vector to be set should not be null.");
+		if (vector.equals(this))
+			return;
+		this.n = vector.n.clone();
+	}
+
+	public void setComponent(int index, double value) {
+		n[index] = value;
 	}
 
 	@Override
