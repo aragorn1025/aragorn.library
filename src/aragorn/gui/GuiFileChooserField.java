@@ -28,7 +28,6 @@ public class GuiFileChooserField extends GuiPanel {
 
 		/** Create {@code GuiFileChooserField.Open}. */
 		public Open(GuiFrame parent) {
-			super();
 			setFileChooser(new GuiFileChooser.Open(parent) {
 
 				@Override
@@ -56,7 +55,6 @@ public class GuiFileChooserField extends GuiPanel {
 
 		/** Create {@code GuiFileChooserField.Save}. */
 		public Save(GuiFrame parent) {
-			super();
 			setFileChooser(new GuiFileChooser.Save(parent) {
 
 				@Override
@@ -86,8 +84,6 @@ public class GuiFileChooserField extends GuiPanel {
 
 	/** Create the file chooser field within a text filed for the path of the chosen file and a button to access the file chooser. */
 	protected GuiFileChooserField() {
-		super();
-
 		field.setEditable(false);
 		field.setBackground(Color.WHITE);
 
