@@ -3,33 +3,9 @@ package aragorn.math.geometry;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-import java.security.InvalidParameterException;
 import aragorn.util.MathVector2D;
 
 public class LineSegment2D implements Cloneable, Paintable {
-
-	public static LineSegment2D get(Polygon2D polygon, int index) {
-		if (polygon.getPointNumber() < 0)
-			throw new InternalError("Unknown polygon.");
-		if (polygon.getPointNumber() == 0 && index != 0) {
-			if (index == 0)
-				return new LineSegment2D();
-			throw new InvalidParameterException("Index out of bounds.");
-		}
-		if (index == polygon.getPointNumber() - 1)
-			return new LineSegment2D(polygon.getPoint(index), polygon.getPoint(0));
-		return new LineSegment2D(polygon.getPoint(index), polygon.getPoint(index + 1));
-	}
-
-	public static LineSegment2D get(Polyline2D polyline, int index) {
-		if (polyline.getPointNumber() < 0)
-			throw new InternalError("Unknown polyline.");
-		if (polyline.getPointNumber() == 0 && index != 0)
-			throw new InvalidParameterException("Index out of bounds.");
-		if (polyline.getPointNumber() == 0 && index == 0)
-			return new LineSegment2D();
-		return new LineSegment2D(polyline.getPoint(index), polyline.getPoint(index + 1));
-	}
 
 	private Point2D.Double[] points = new Point2D.Double[2];
 
@@ -86,11 +62,11 @@ public class LineSegment2D implements Cloneable, Paintable {
 	}
 
 	public Point2D.Double getPoint(int index) {
-		return points[index];
+		return (Point2D.Double) points[index].clone();
 	}
 
 	public int getPointsNumber() {
-		return 2;
+		return points.length;
 	}
 
 	public MathVector2D getVector() {

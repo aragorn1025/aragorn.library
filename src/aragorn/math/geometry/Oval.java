@@ -33,7 +33,7 @@ public class Oval implements Paintable {
 	}
 
 	public Point2D.Double getCenter() {
-		return center;
+		return (Point2D.Double) center.clone();
 	}
 
 	public double getHeight() {

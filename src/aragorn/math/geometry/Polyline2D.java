@@ -3,6 +3,7 @@ package aragorn.math.geometry;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import aragorn.util.MathVector2D;
 
@@ -96,11 +97,17 @@ public class Polyline2D implements Cloneable, Paintable {
 	}
 
 	public LineSegment2D getLineSegment(int index) {
-		return LineSegment2D.get(this, index);
+		if (getPointNumber() < 0)
+			throw new InternalError("Unknown polyline.");
+		if (getPointNumber() == 0 && index != 0)
+			throw new InvalidParameterException("Index out of bounds.");
+		if (getPointNumber() == 0 && index == 0)
+			throw new IllegalStateException("No segment get for the polygon with no points.");
+		return new LineSegment2D(getPoint(index), getPoint(index + 1));
 	}
 
 	public Point2D.Double getPoint(int index) {
-		return points.get(index);
+		return (Point2D.Double) points.get(index).clone();
 	}
 
 	public int getPointNumber() {
