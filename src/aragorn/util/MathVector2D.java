@@ -20,7 +20,10 @@ public class MathVector2D extends MathVector {
 	 *     (optional) the other vectors to add
 	 */
 	public static MathVector2D add(MathVector2D vector_0, MathVector2D vector_1, MathVector2D... vectors) {
-		return (MathVector2D) MathVector.add(vector_0, vector_1, vectors);
+		MathVector val = MathVector.add(vector_0, vector_1, vectors);
+		if (val.getDimension() != 2)
+			throw new InternalError("Unknown error.");
+		return new MathVector2D(val.getComponent(0), val.getComponent(1));
 	}
 
 	/**
