@@ -4,9 +4,20 @@ import aragorn.util.MathVector;
 
 public abstract class Neuron {
 
-	protected abstract double getOutput(MathVector input_vector);
+	private int input_dimension;
 
-	protected abstract void randomizeWeights();
+	protected Neuron(int input_dimension) {
+		this.input_dimension = input_dimension;
+	}
 
+	public int getInputDimension() {
+		return input_dimension;
+	}
+
+	public abstract double getOutput(MathVector input_vector);
+
+	public abstract void randomizeWeight();
+
+	@Override
 	public abstract String toString();
 }

@@ -87,14 +87,13 @@ public class MathVector implements Cloneable {
 
 	@Override
 	public Object clone() {
-		MathVector val;
 		try {
-			val = (MathVector) super.clone();
+			MathVector val = (MathVector) super.clone();
 			val.n = this.n.clone();
+			return val;
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError(e.toString());
 		}
-		return val;
 	}
 
 	@Override
@@ -165,6 +164,10 @@ public class MathVector implements Cloneable {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s", getClass().getSimpleName(), Arrays.toString(n));
+		String array = String.format("%.8f", n[0]);
+		for (int i = 1; i < n.length; i++) {
+			array += String.format(", %.8f", n[i]);
+		}
+		return String.format("%s [%s]", getClass().getSimpleName(), array);
 	}
 }

@@ -4,17 +4,24 @@ import aragorn.util.MathVector;
 
 public abstract class NeuralNetwork {
 
+	private int input_dimension;
+
 	private NeuralLayer[] neural_layers;
 
-	protected NeuralNetwork(int layer_number) {
+	protected NeuralNetwork(int input_dimension, int layer_number) {
+		this.input_dimension = input_dimension;
 		neural_layers = new NeuralLayer[layer_number];
 	}
 
-	protected NeuralLayer getNeuralLayer(int i) {
+	public int getInputDimension() {
+		return input_dimension;
+	}
+
+	public NeuralLayer getNeuralLayer(int i) {
 		return neural_layers[i];
 	}
 
-	protected int getNeuralLayerNumber() {
+	public int getNeuralLayerNumber() {
 		return neural_layers.length;
 	}
 
@@ -24,6 +31,10 @@ public abstract class NeuralNetwork {
 			vector = layer.getOutput(vector);
 		}
 		return vector;
+	}
+
+	public int getOutputDimension() {
+		return getNeuralLayer(getNeuralLayerNumber() - 1).getOutputDimension();
 	}
 
 	public void randomizeWeight() {

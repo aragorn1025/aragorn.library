@@ -8,15 +8,12 @@ class OutputNeuron extends Neuron {
 	private MathVector w;
 
 	OutputNeuron(int input_dimension) {
-		this(new MathVector(input_dimension + 1));
-	}
-
-	private OutputNeuron(MathVector w) {
-		this.w = (MathVector) w.clone();
+		super(input_dimension);
+		this.w = new MathVector(input_dimension + 1);
 	}
 
 	@Override
-	protected double getOutput(MathVector input_vector) {
+	public double getOutput(MathVector input_vector) {
 		if (1 + input_vector.getDimension() != w.getDimension())
 			throw new IllegalArgumentException("The dimension of the input vector mismatched.");
 		MathVector concatenated_vector = MathVector.concatenate(new MathVector(1), input_vector);
@@ -24,14 +21,18 @@ class OutputNeuron extends Neuron {
 		return MathVector.getInnerProduct(concatenated_vector, w);
 	}
 
+	public double getW(int i) {
+		return w.getComponent(i);
+	}
+
 	@Override
-	protected void randomizeWeights() {
+	public void randomizeWeight() {
 		for (int i = 0; i < w.getDimension(); i++) {
 			w.setComponent(i, Math.random());
 		}
 	}
 
-	void setW(int i, double w_i) {
+	public void setW(int i, double w_i) {
 		w.setComponent(i, w_i);
 	}
 
