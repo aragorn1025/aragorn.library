@@ -69,7 +69,7 @@ public class RadialBasisFunctionNetworkWeight implements Cloneable {
 	}
 
 	@Override
-	protected Object clone() {
+	public Object clone() {
 		try {
 			RadialBasisFunctionNetworkWeight val = (RadialBasisFunctionNetworkWeight) super.clone();
 			val.sigma = this.sigma.clone();
