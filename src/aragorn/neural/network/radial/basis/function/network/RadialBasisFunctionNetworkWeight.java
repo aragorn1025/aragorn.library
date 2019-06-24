@@ -40,16 +40,55 @@ public class RadialBasisFunctionNetworkWeight implements Cloneable {
 		}
 	}
 
+	@Override
+	public Object clone() {
+		try {
+			RadialBasisFunctionNetworkWeight val = (RadialBasisFunctionNetworkWeight) super.clone();
+			val.sigma = this.sigma.clone();
+			val.m = Arrays.copyOf(this.m, this.m.length);
+			for (int i = 0; i < m.length; i++) {
+				val.m[i] = (MathVector) m[i].clone();
+			}
+			val.w = Arrays.copyOf(this.w, this.w.length);
+			for (int i = 0; i < w.length; i++) {
+				val.w[i] = (MathVector) w[i].clone();
+			}
+			return val;
+		} catch (CloneNotSupportedException e) {
+			throw new UnknownError("Unknown error.");
+		}
+	}
+
 	public double getM(int j, int i) {
 		return m[j].getComponent(i);
+	}
+
+	public int getMDimension() {
+		return m[0].getDimension();
+	}
+
+	public int getMSize() {
+		return m.length;
 	}
 
 	public double getSigma(int j) {
 		return sigma[j];
 	}
 
+	public int getSigmaSize() {
+		return sigma.length;
+	}
+
 	public double getW(int j, int i) {
 		return w[j].getComponent(i);
+	}
+
+	public int getWDimension() {
+		return w[0].getDimension();
+	}
+
+	public int getWSize() {
+		return w.length;
 	}
 
 	public void randomized() {
@@ -68,23 +107,16 @@ public class RadialBasisFunctionNetworkWeight implements Cloneable {
 		}
 	}
 
-	@Override
-	public Object clone() {
-		try {
-			RadialBasisFunctionNetworkWeight val = (RadialBasisFunctionNetworkWeight) super.clone();
-			val.sigma = this.sigma.clone();
-			val.m = Arrays.copyOf(this.m, this.m.length);
-			for (int i = 0; i < m.length; i++) {
-				val.m[i] = (MathVector) m[i].clone();
-			}
-			val.w = Arrays.copyOf(this.w, this.w.length);
-			for (int i = 0; i < w.length; i++) {
-				val.w[i] = (MathVector) w[i].clone();
-			}
-			return val;
-		} catch (CloneNotSupportedException e) {
-			throw new UnknownError("Unknown error.");
-		}
+	public void setM(int j, int i, double m_j_i) {
+		m[j].setComponent(i, m_j_i);
+	}
+
+	public void setSigma(int j, double sigma_j) {
+		sigma[j] = sigma_j;
+	}
+
+	public void setW(int j, int i, double w_j_i) {
+		w[j].setComponent(i, w_j_i);
 	}
 
 	@Override
