@@ -65,6 +65,7 @@ public class Polygon2D implements Cloneable, Paintable {
 		Paintable.drawLine(g, c, getPoint(0), getPoint(getPointNumber() - 1));
 	}
 
+	@Override
 	public Rectangle2D.Double getBounds() {
 		return polyline.getBounds();
 	}

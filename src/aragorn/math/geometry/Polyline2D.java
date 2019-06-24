@@ -80,6 +80,7 @@ public class Polyline2D implements Cloneable, Paintable {
 		}
 	}
 
+	@Override
 	public Rectangle2D.Double getBounds() {
 		if (getPointNumber() == 0)
 			return new Rectangle2D.Double();

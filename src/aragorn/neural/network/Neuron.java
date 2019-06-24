@@ -16,7 +16,11 @@ public abstract class Neuron {
 
 	public abstract double getOutput(MathVector input_vector);
 
-	public abstract void randomizeWeight();
+	public final void randomizeWeight() {
+		randomizeWeight(Float.MIN_VALUE, Float.MAX_VALUE);
+	}
+
+	public abstract void randomizeWeight(double min, double max);
 
 	@Override
 	public abstract String toString();

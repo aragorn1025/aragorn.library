@@ -1,6 +1,7 @@
 package aragorn.gui;
 
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.security.InvalidParameterException;
@@ -76,7 +77,7 @@ public class GuiFrame extends JFrame {
 		setLocationRelativeTo(null);
 
 		if (is_maximized_while_launch) {
-			setExtendedState(JFrame.MAXIMIZED_BOTH);
+			setExtendedState(Frame.MAXIMIZED_BOTH);
 		}
 
 		setDefaultCloseOperation(0);

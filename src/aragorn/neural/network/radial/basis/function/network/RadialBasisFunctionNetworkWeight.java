@@ -92,17 +92,21 @@ public class RadialBasisFunctionNetworkWeight implements Cloneable {
 	}
 
 	public void randomized() {
+		randomized(Float.MIN_VALUE, Float.MAX_VALUE);
+	}
+
+	public void randomized(double min, double max) {
 		for (int i = 0; i < sigma.length; i++) {
-			sigma[i] = Math.random();
+			sigma[i] = Math.random() * (max - min) + min;
 		}
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m[i].getDimension(); j++) {
-				m[i].setComponent(j, Math.random());
+				m[i].setComponent(j, Math.random() * (max - min) + min);
 			}
 		}
 		for (int i = 0; i < w.length; i++) {
 			for (int j = 0; j < w[i].getDimension(); j++) {
-				w[i].setComponent(j, Math.random());
+				w[i].setComponent(j, Math.random() * (max - min) + min);
 			}
 		}
 	}

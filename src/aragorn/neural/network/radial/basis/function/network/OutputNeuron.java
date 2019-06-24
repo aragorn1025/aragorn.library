@@ -26,9 +26,9 @@ class OutputNeuron extends Neuron {
 	}
 
 	@Override
-	public void randomizeWeight() {
+	public void randomizeWeight(double min, double max) {
 		for (int i = 0; i < w.getDimension(); i++) {
-			w.setComponent(i, Math.random());
+			w.setComponent(i, Math.random() * (max - min) + min);
 		}
 	}
 
